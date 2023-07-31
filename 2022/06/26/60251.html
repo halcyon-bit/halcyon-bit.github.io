@@ -1,0 +1,1172 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Redis, halcyon">
+    <meta name="description" content="一、NoSQLNoSQL：一类新出现的数据库（not only sql）
+
+泛指非关系型数据库；
+不支持 SQL 语法；
+存储结构跟传统关系型数据库中的那种关系表完全不同，NoSQL 中存储的数据都是 KV 形式；
+NoSQL 的世界中没有">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Redis | halcyon</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">halcyon</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">halcyon</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Redis</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Redis/">
+                                <span class="chip bg-color">Redis</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-category">
+                                数据库
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-06-26
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    1.5k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    6 分
+                </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="一、NoSQL"><a href="#一、NoSQL" class="headerlink" title="一、NoSQL"></a>一、NoSQL</h2><p>NoSQL：一类新出现的数据库（not only sql）</p>
+<ul>
+<li>泛指非关系型数据库；</li>
+<li>不支持 SQL 语法；</li>
+<li>存储结构跟传统关系型数据库中的那种关系表完全不同，NoSQL 中存储的数据都是 KV 形式；</li>
+<li>NoSQL 的世界中没有一种通用的语言，每种 NoSQL 数据库都有自己的 API 和语法，以及擅长的业务场景；</li>
+<li>NoSQL 中的产品种类：Redis、Mongodb 等。</li>
+</ul>
+<h2 id="二、特性"><a href="#二、特性" class="headerlink" title="二、特性"></a>二、特性</h2><ul>
+<li>Redis 支持数据的持久化，可以将内存中的数据保存在磁盘中，重启的时候可以再次加载进行使用；</li>
+<li>Redis 不仅仅支持简单的 key-value 类型的数据，同时还提供 list，set，zset，hash 等数据结构的存储；</li>
+<li>Redis 支持数据的备份，即 master-slave 模式的数据备份。</li>
+</ul>
+<h2 id="三、数据类型"><a href="#三、数据类型" class="headerlink" title="三、数据类型"></a>三、数据类型</h2><p>Redis 默认有 16 个数据库，通过 0-15 标识，默认选择第一个数据库。<code>select 10</code></p>
+<ul>
+<li>字符串 string</li>
+<li>哈希 hash</li>
+<li>列表 list</li>
+<li>集合 set</li>
+<li>有序集合 zset</li>
+</ul>
+<p>key 不能重复</p>
+<h3 id="3-1-string"><a href="#3-1-string" class="headerlink" title="3.1 string"></a>3.1 string</h3><p>字符串类型是 Redis 中最基础的数据存储类型，它在 Redis 中是二进制安全的，这意味着该类型可以接受任何格式的数据，如 JPEG 图像数据或 json 数据等。在 Redis 中字符串类型的 Value 最多可以容纳的数据长度是 512M。</p>
+<h4 id="3-1-1-添加、修改"><a href="#3-1-1-添加、修改" class="headerlink" title="3.1.1 添加、修改"></a>3.1.1 添加、修改</h4><p>如果设置的键不存在则为添加，如果已存在则为修改。</p>
+<p><strong>语法</strong>：<code>set key value</code></p>
+<pre class="line-numbers language-redis" data-language="redis"><code class="language-redis">set name hello
+set name world<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>Redis 的 key 可以设置过期时间，到期后该键值对失效。</p>
+<p><strong>语法</strong>：<code>setex key seconds value</code></p>
+<pre class="line-numbers language-redis" data-language="redis"><code class="language-redis">setex name 5 hello<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>设置多个键值对</p>
+<p><strong>语法</strong>：<code>mset key1 value1 key2 value2 ...</code></p>
+<pre class="line-numbers language-redis" data-language="redis"><code class="language-redis">mset name1 hello name2 world<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="3-1-2-获取"><a href="#3-1-2-获取" class="headerlink" title="3.1.2 获取"></a>3.1.2 获取</h4><p>根据键获取值，如果不存在则返回 nil</p>
+<p><strong>语法</strong>：<code>get key</code></p>
+<pre class="line-numbers language-redis" data-language="redis"><code class="language-redis">set name hello
+get name<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>根据多个键获取多个值</p>
+<p><strong>语法</strong>：<code>mget key1 key2 ...</code></p>
+<pre class="line-numbers language-redis" data-language="redis"><code class="language-redis">mset name1 hello name2 world
+mget name1 name2<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="3-1-3-删除"><a href="#3-1-3-删除" class="headerlink" title="3.1.3 删除"></a>3.1.3 删除</h4><p>删除键及对应的值</p>
+<p><strong>语法</strong>：<code>del key1 key2 ...</code></p>
+<pre class="line-numbers language-redis" data-language="redis"><code class="language-redis">set name hello
+del name<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="3-2-hash"><a href="#3-2-hash" class="headerlink" title="3.2 hash"></a>3.2 hash</h3><p>hash 是一个 string 类型的 field（字段）和 value（值）的映射表，hash 特别适合用于存储对象。</p>
+<h4 id="3-2-1-添加、修改"><a href="#3-2-1-添加、修改" class="headerlink" title="3.2.1 添加、修改"></a>3.2.1 添加、修改</h4><p><strong>语法</strong>：<code>hset key field1 value1 field2 value2 ...</code></p>
+<p><code>hmset key field1 value1 field2 value2 ... </code></p>
+<pre class="line-numbers language-redis" data-language="redis"><code class="language-redis">hset name a 1 b 2 c 3 d 4
+hset name a 5 b 2 c 3 d 4<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="3-2-2-获取"><a href="#3-2-2-获取" class="headerlink" title="3.2.2 获取"></a>3.2.2 获取</h4><p>获取指定键的所有属性</p>
+<p><strong>语法</strong>：<code>hkeys key</code></p>
+<pre class="line-numbers language-redis" data-language="redis"><code class="language-redis">hkeys name<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>获取指定键的一个属性的值</p>
+<p><strong>语法</strong>：<code>hget key field</code></p>
+<pre class="line-numbers language-redis" data-language="redis"><code class="language-redis">hget name a<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>获取指定键的多个属性的多个值</p>
+<p><strong>语法</strong>：<code>hmget key field1 field2</code></p>
+<pre class="line-numbers language-redis" data-language="redis"><code class="language-redis">hmget name a b<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>获取指定键的所有属性的值</p>
+<p><strong>语法</strong>：<code>hvals key</code></p>
+<pre class="line-numbers language-redis" data-language="redis"><code class="language-redis">hvals name<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="3-2-3-删除"><a href="#3-2-3-删除" class="headerlink" title="3.2.3 删除"></a>3.2.3 删除</h4><p>删除整个键值对，使用 del 命令。</p>
+<p>删除指定键的某些属性</p>
+<p><strong>语法</strong>：<code>hdel key field1 field2</code></p>
+<pre class="line-numbers language-redis" data-language="redis"><code class="language-redis">hdel name a b<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="3-3-list"><a href="#3-3-list" class="headerlink" title="3.3 list"></a>3.3 list</h3><p>list 是简单的字符串列表，按照插入顺序排序。可以添加一个元素到列表的头部（左边）或者尾部（右边）</p>
+<h4 id="3-3-1-增加"><a href="#3-3-1-增加" class="headerlink" title="3.3.1 增加"></a>3.3.1 增加</h4><p>左侧插入数据</p>
+<p><strong>语法</strong>：<code>lpush key value1 value2 ...</code></p>
+<pre class="line-numbers language-redis" data-language="redis"><code class="language-redis">lpush name 1 2 3
+内存中：3 2 1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>右侧插入数据</p>
+<p><strong>语法</strong>：<code>rpush key value1 value2 ...</code></p>
+<pre class="line-numbers language-redis" data-language="redis"><code class="language-redis">rpush name 4 5 6
+内存中 4 5 6<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="3-3-2-获取"><a href="#3-3-2-获取" class="headerlink" title="3.3.2 获取"></a>3.3.2 获取</h4><p>返回列表里指定范围内的元素</p>
+<p><strong>语法</strong>：<code>lrange key start stop</code></p>
+<p>start、stop 为元素的下标索引，索引从左侧开始，第一个元素为 0；索引可以是负数，表示从尾部开始计数，如 -1 表示最后⼀个元素。</p>
+<pre class="line-numbers language-redis" data-language="redis"><code class="language-redis">lrange name 0 -1<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="3-3-3-删除"><a href="#3-3-3-删除" class="headerlink" title="3.3.3 删除"></a>3.3.3 删除</h4><p>删除整个键值对，使用 del 命令。</p>
+<p>删除指定键的某些元素。</p>
+<p><strong>语法</strong>：<code>lrem key count value</code></p>
+<p>根据参数 count 的值，移除列表中与参数 value 相等的元素。</p>
+<ul>
+<li>count &gt; 0：从表头开始向表尾搜索，移除与 value 相等的元素，数量为 count </li>
+<li>count &lt; 0：从表尾开始向表头搜索，移除与 value 相等的元素，数量为 count 的绝对值</li>
+<li>count = 0：移除表中所有与 value 相等的值</li>
+</ul>
+<pre class="line-numbers language-redis" data-language="redis"><code class="language-redis">lpush name 1 2 3 4 5 6 1 2 3 1 1 1
+内存：1 1 1 3 2 1 6 5 4 3 2 1
+lrem name 3 1
+内存：3 2 1 6 5 4 3 2 1
+lrem name -1 2
+内存：3 2 1 6 5 4 3 1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="3-4-set"><a href="#3-4-set" class="headerlink" title="3.4 set"></a>3.4 set</h3><p>set 是 string 类型的无序集合，集合成员是唯一的。集合是通过哈希表实现的，所以添加，删除，查找的复杂度都是 O(1)。</p>
+<h4 id="3-4-1-增加"><a href="#3-4-1-增加" class="headerlink" title="3.4.1 增加"></a>3.4.1 增加</h4><p><strong>语法</strong>：<code>sadd key member1 member2</code></p>
+<pre class="line-numbers language-redis" data-language="redis"><code class="language-redis">sadd name 1 2 3 1 4 2
+内存：1 2 3 4<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="3-4-2-获取"><a href="#3-4-2-获取" class="headerlink" title="3.4.2 获取"></a>3.4.2 获取</h4><p>获取所有元素</p>
+<p><strong>语法</strong>：<code>smembers key</code></p>
+<pre class="line-numbers language-redis" data-language="redis"><code class="language-redis">smembers name<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="3-4-3-删除"><a href="#3-4-3-删除" class="headerlink" title="3.4.3 删除"></a>3.4.3 删除</h4><p>删除整个键值对，使用 del 命令。</p>
+<p>删除指定键的某些元素。</p>
+<p><strong>语法</strong>：<code>srem key member1 member2 ...</code></p>
+<pre class="line-numbers language-redis" data-language="redis"><code class="language-redis">srem name 1 2<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="3-5-zset"><a href="#3-5-zset" class="headerlink" title="3.5 zset"></a>3.5 zset</h3><p>zset 是 string 类型的有序集合，集合成员是唯一的。每个元素都会关联一个 double 类型的分数。redis 是通过分数来为集合中的成员进行从小到大的排序。分数(score)是可以重复。</p>
+<h4 id="3-5-1-增加"><a href="#3-5-1-增加" class="headerlink" title="3.5.1 增加"></a>3.5.1 增加</h4><p><strong>语法</strong>：<code>zadd key score1 member1 score2 member2 ...</code></p>
+<pre class="line-numbers language-redis" data-language="redis"><code class="language-redis">zadd name 1 a 2 b 3 c 1 d
+内存 a d b c<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="3-5-2-获取"><a href="#3-5-2-获取" class="headerlink" title="3.5.2 获取"></a>3.5.2 获取</h4><p><strong>语法</strong>：<code>zrange key start stop</code></p>
+<p>start、stop 的使用与 list 相同。</p>
+<pre class="line-numbers language-redis" data-language="redis"><code class="language-redis">zrange name 0 -1<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="3-5-3-删除"><a href="#3-5-3-删除" class="headerlink" title="3.5.3 删除"></a>3.5.3 删除</h4><p>删除整个键值对，使用 del 命令。</p>
+<p>删除指定键的某些元素。</p>
+<p><strong>语法</strong>：<code>zrem key member1 member2</code></p>
+<pre class="line-numbers language-redis" data-language="redis"><code class="language-redis">zrem name a b<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="3-6-其他命令"><a href="#3-6-其他命令" class="headerlink" title="3.6 其他命令"></a>3.6 其他命令</h3><h4 id="3-6-1-查找键"><a href="#3-6-1-查找键" class="headerlink" title="3.6.1 查找键"></a>3.6.1 查找键</h4><p>支持正则表达式</p>
+<p><strong>语法</strong>：<code>keys pattern</code></p>
+<pre class="line-numbers language-redis" data-language="redis"><code class="language-redis">keys *
+keys na*<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="3-6-2-判断键是否存在"><a href="#3-6-2-判断键是否存在" class="headerlink" title="3.6.2 判断键是否存在"></a>3.6.2 判断键是否存在</h4><p><strong>语法</strong>：<code>exists key1 key2 key3</code></p>
+<p>若 key 存在返回 1，否则返回 0。</p>
+<pre class="line-numbers language-redis" data-language="redis"><code class="language-redis">exists name<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="3-6-3-查看键对应-value-的类型"><a href="#3-6-3-查看键对应-value-的类型" class="headerlink" title="3.6.3 查看键对应 value 的类型"></a>3.6.3 查看键对应 value 的类型</h4><p><strong>语法</strong>：<code>type key</code></p>
+<pre class="line-numbers language-redis" data-language="redis"><code class="language-redis">type name<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="3-6-4-键的过期时间"><a href="#3-6-4-键的过期时间" class="headerlink" title="3.6.4 键的过期时间"></a>3.6.4 键的过期时间</h4><p>设置过期时间，以秒为单位。</p>
+<p><strong>语法</strong>：<code>expire key seconds</code></p>
+<pre class="line-numbers language-redis" data-language="redis"><code class="language-redis">expire name 10<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>查看有效时间，以秒为单位。</p>
+<p><strong>语法</strong>：<code>ttl key</code></p>
+<pre class="line-numbers language-redis" data-language="redis"><code class="language-redis">ttl name<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <!--
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">gjq</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://halcyon-bit.github.io/2022/06/26/60251.html">https://halcyon-bit.github.io/2022/06/26/60251.html</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">gjq</a>
+                    !
+                </span>
+            </div>
+            -->
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Redis/">
+                                    <span class="chip bg-color">Redis</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/03/08/54164.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="基础-环境(Rust)">
+                        
+                        <span class="card-title">基础-环境(Rust)</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-03-08
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%90%8E%E7%AB%AF/" class="post-category">
+                                    后端
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/rust/">
+                        <span class="chip bg-color">rust</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/07/29/37346.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="语句的执行过程(MySQL)">
+                        
+                        <span class="card-title">语句的执行过程(MySQL)</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-29
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-category">
+                                    数据库
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/MySQL/">
+                        <span class="chip bg-color">MySQL</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+<!-- 代码语言 -->
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+<!-- 代码块复制 -->
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/clipboard.min.js"></script>
+<!-- 代码块收缩 -->
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script> 
+<!-- 代码块折行 -->
+<style type="text/css">code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }</style>
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2023</span>
+            
+            <!--
+            <a href="/about" target="_blank">gjq</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+            
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+            -->
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/halcyon-bit" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:329707880@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=329707880" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 329707880" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+    
+    
+
+    <!-- 雪花特效 -->
+     
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/snow.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
