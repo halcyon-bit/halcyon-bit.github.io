@@ -420,8 +420,6 @@
       
         <tags>
             
-            <tag> C++ </tag>
-            
             <tag> C++14 </tag>
             
         </tags>
@@ -446,8 +444,6 @@
       
       
         <tags>
-            
-            <tag> C++ </tag>
             
             <tag> C++14 </tag>
             
@@ -474,8 +470,6 @@
       
         <tags>
             
-            <tag> C++ </tag>
-            
             <tag> C++14 </tag>
             
         </tags>
@@ -500,8 +494,6 @@
       
       
         <tags>
-            
-            <tag> C++ </tag>
             
             <tag> C++14 </tag>
             
@@ -528,8 +520,6 @@
       
         <tags>
             
-            <tag> C++ </tag>
-            
             <tag> C++14 </tag>
             
         </tags>
@@ -554,8 +544,6 @@
       
       
         <tags>
-            
-            <tag> C++ </tag>
             
             <tag> C++11 </tag>
             
@@ -582,8 +570,6 @@
       
         <tags>
             
-            <tag> C++ </tag>
-            
             <tag> C++11 </tag>
             
         </tags>
@@ -608,8 +594,6 @@
       
       
         <tags>
-            
-            <tag> C++ </tag>
             
             <tag> C++11 </tag>
             
@@ -636,8 +620,6 @@
       
         <tags>
             
-            <tag> C++ </tag>
-            
             <tag> C++11 </tag>
             
         </tags>
@@ -662,8 +644,6 @@
       
       
         <tags>
-            
-            <tag> C++ </tag>
             
             <tag> C++11 </tag>
             
@@ -690,8 +670,6 @@
       
         <tags>
             
-            <tag> C++ </tag>
-            
             <tag> C++11 </tag>
             
         </tags>
@@ -716,8 +694,6 @@
       
       
         <tags>
-            
-            <tag> C++ </tag>
             
             <tag> C++11 </tag>
             
@@ -744,8 +720,6 @@
       
         <tags>
             
-            <tag> C++ </tag>
-            
             <tag> C++11 </tag>
             
         </tags>
@@ -770,8 +744,6 @@
       
       
         <tags>
-            
-            <tag> C++ </tag>
             
             <tag> C++11 </tag>
             
@@ -798,8 +770,6 @@
       
         <tags>
             
-            <tag> C++ </tag>
-            
             <tag> C++11 </tag>
             
         </tags>
@@ -824,8 +794,6 @@
       
       
         <tags>
-            
-            <tag> C++ </tag>
             
             <tag> C++11 </tag>
             
@@ -852,8 +820,6 @@
       
         <tags>
             
-            <tag> C++ </tag>
-            
             <tag> C++11 </tag>
             
         </tags>
@@ -878,8 +844,6 @@
       
       
         <tags>
-            
-            <tag> C++ </tag>
             
             <tag> C++11 </tag>
             
@@ -906,8 +870,6 @@
       
         <tags>
             
-            <tag> C++ </tag>
-            
             <tag> C++11 </tag>
             
         </tags>
@@ -933,7 +895,7 @@
       
         <tags>
             
-            <tag> C++ </tag>
+            <tag> Cpp </tag>
             
         </tags>
       
@@ -958,7 +920,7 @@
       
         <tags>
             
-            <tag> C++ </tag>
+            <tag> Cpp </tag>
             
         </tags>
       
@@ -983,7 +945,7 @@
       
         <tags>
             
-            <tag> C++ </tag>
+            <tag> Cpp </tag>
             
         </tags>
       
@@ -1008,7 +970,7 @@
       
         <tags>
             
-            <tag> C++ </tag>
+            <tag> Cpp </tag>
             
         </tags>
       
@@ -1033,7 +995,7 @@
       
         <tags>
             
-            <tag> C </tag>
+            <tag> c </tag>
             
         </tags>
       
@@ -1058,7 +1020,7 @@
       
         <tags>
             
-            <tag> C </tag>
+            <tag> c </tag>
             
         </tags>
       
@@ -1083,7 +1045,7 @@
       
         <tags>
             
-            <tag> C </tag>
+            <tag> c </tag>
             
         </tags>
       
@@ -1108,7 +1070,7 @@
       
         <tags>
             
-            <tag> C </tag>
+            <tag> c </tag>
             
         </tags>
       
@@ -1121,7 +1083,7 @@
       <link href="/2020/07/13/47716.html"/>
       <url>/2020/07/13/47716.html</url>
       
-        <content type="html"><![CDATA[<h2 id="一、别名"><a href="#一、别名" class="headerlink" title="一、别名"></a>一、别名</h2><ul><li>掩饰符合类型，如指针和数组</li></ul><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">// 数组</span><span class="token keyword">char</span> text1<span class="token punctuation">[</span><span class="token number">81</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token keyword">char</span> text2<span class="token punctuation">[</span><span class="token number">81</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token keyword">typedef</span> <span class="token keyword">char</span> Line<span class="token punctuation">[</span><span class="token number">81</span><span class="token punctuation">]</span><span class="token punctuation">;</span>Line text1<span class="token punctuation">,</span> text2<span class="token punctuation">;</span>  <span class="token comment">// 等同于上面的两个数组</span><span class="token comment">// 指针</span><span class="token keyword">typedef</span> <span class="token keyword">char</span><span class="token operator">*</span> pStr<span class="token punctuation">;</span>pStr p1<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ul><li>与结构结合使用</li></ul><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token class-name">tagMyStruct</span><span class="token punctuation">{</span>    <span class="token keyword">int</span> num<span class="token punctuation">;</span>    <span class="token keyword">long</span> length<span class="token punctuation">;</span><span class="token punctuation">}</span> MyStruct<span class="token punctuation">;</span><span class="token comment">// 等价于</span><span class="token keyword">struct</span> <span class="token class-name">tagMyStruct</span><span class="token punctuation">{</span>    <span class="token keyword">int</span> num<span class="token punctuation">;</span>    <span class="token keyword">long</span> length<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">;</span><span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token class-name">tagMyStruct</span> MyStruct<span class="token punctuation">;</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>分析：tagMyStruct 称为“tag”，即“标签”，实际上是一个临时名字，struct 关键字和 tagMyStruct 一起，构成了这个结构类型，不论是否有 typedef，这个结构都存在。</p><p>所以，若没有 typedef，则使用 <code>struct tagMyStruct varName</code> 来定义变量，但要注意，使用 <code>tagMyStruct varName</code> 来定义变量是不对的，因为 struct 和 tagMyStruct 合在一起才能表示一个结构类型。</p><h2 id="二、宏定义"><a href="#二、宏定义" class="headerlink" title="二、宏定义"></a>二、宏定义</h2><ul><li>宏的单行定义</li></ul><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name function">A</span><span class="token expression"><span class="token punctuation">(</span>x<span class="token punctuation">)</span>  T_</span><span class="token punctuation">##</span><span class="token expression">x</span></span><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name function">B</span><span class="token expression"><span class="token punctuation">(</span>x<span class="token punctuation">)</span>  #@x</span></span><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name function">C</span><span class="token expression"><span class="token punctuation">(</span>x<span class="token punctuation">)</span>  #x</span></span><span class="token function">A</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// 结果: T_1 直接把 1 黏贴上去</span><span class="token function">B</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// 结果: '1' 把 1 带上单引号后黏贴上去</span><span class="token function">C</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// 结果: "1" 把 1 带上双引号后黏贴上去</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ul><li>条件编译</li></ul><p>在跨平台和系统的软件里，条件编译就很重要了。</p><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">ifdef</span> <span class="token expression">WINDOWS</span></span>    <span class="token comment">// 如果 WINDOWS 宏被定义，就执行这里的内容</span><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">ifdef</span> <span class="token expression">LINUX</span></span>    <span class="token comment">// 如果 LINUX 宏被定义，执行这里的内容</span><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">else</span></span>    <span class="token comment">// 如果 LINUX 宏没有被定义，执行这里的内容</span><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ul><li>防止头文件被重复编译</li></ul><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">ifndef</span> <span class="token expression">_SOMEFILE_H_</span></span><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">_SOMEFILE_H_</span></span><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><ul><li>得到指定地址上的一个字节或字</li></ul><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name function">MEM_B</span><span class="token expression"><span class="token punctuation">(</span>x<span class="token punctuation">)</span>    <span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span><span class="token punctuation">(</span>byte<span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span></span></span><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name function">MEM_W</span><span class="token expression"><span class="token punctuation">(</span>x<span class="token punctuation">)</span>    <span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span><span class="token punctuation">(</span>word<span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>]]></content>
+        <content type="html"><![CDATA[<h2 id="一、别名"><a href="#一、别名" class="headerlink" title="一、别名"></a>一、别名</h2><ul><li>掩饰符合类型，如指针和数组</li></ul><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">// 数组</span><span class="token keyword">char</span> text1<span class="token punctuation">[</span><span class="token number">81</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token keyword">char</span> text2<span class="token punctuation">[</span><span class="token number">81</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token keyword">typedef</span> <span class="token keyword">char</span> Line<span class="token punctuation">[</span><span class="token number">81</span><span class="token punctuation">]</span><span class="token punctuation">;</span>Line text1<span class="token punctuation">,</span> text2<span class="token punctuation">;</span>  <span class="token comment">// 等同于上面的两个数组</span><span class="token comment">// 指针</span><span class="token keyword">typedef</span> <span class="token keyword">char</span><span class="token operator">*</span> pStr<span class="token punctuation">;</span>pStr p1<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ul><li>与结构结合使用</li></ul><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token class-name">tagMyStruct</span><span class="token punctuation">{</span>    <span class="token keyword">int</span> num<span class="token punctuation">;</span>    <span class="token keyword">long</span> length<span class="token punctuation">;</span><span class="token punctuation">}</span> MyStruct<span class="token punctuation">;</span><span class="token comment">// 等价于</span><span class="token keyword">struct</span> <span class="token class-name">tagMyStruct</span><span class="token punctuation">{</span>    <span class="token keyword">int</span> num<span class="token punctuation">;</span>    <span class="token keyword">long</span> length<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">;</span><span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token class-name">tagMyStruct</span> MyStruct<span class="token punctuation">;</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>分析：tagMyStruct 称为“tag”，即“标签”，实际上是一个临时名字，struct 关键字和 tagMyStruct 一起，构成了这个结构类型，不论是否有 typedef，这个结构都存在。</p><p>所以，若没有 typedef，则使用 <code>struct tagMyStruct varName</code> 来定义变量，但要注意，使用 <code>tagMyStruct varName</code> 来定义变量是不对的，因为 struct 和 tagMyStruct 合在一起才能表示一个结构类型。</p><h2 id="二、宏定义"><a href="#二、宏定义" class="headerlink" title="二、宏定义"></a>二、宏定义</h2><ul><li>宏的单行定义</li></ul><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name function">A</span><span class="token expression"><span class="token punctuation">(</span>x<span class="token punctuation">)</span>  T_</span><span class="token punctuation">##</span><span class="token expression">x</span></span><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name function">B</span><span class="token expression"><span class="token punctuation">(</span>x<span class="token punctuation">)</span>  #@x</span></span><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name function">C</span><span class="token expression"><span class="token punctuation">(</span>x<span class="token punctuation">)</span>  #x</span></span><span class="token function">A</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// 结果: T_1 直接把 1 黏贴上去</span><span class="token function">B</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// 结果: '1' 把 1 带上单引号后黏贴上去</span><span class="token function">C</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// 结果: "1" 把 1 带上双引号后黏贴上去</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ul><li>条件编译</li></ul><p>在跨平台和系统的软件里，条件编译就很重要了。</p><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">ifdef</span> <span class="token expression">WINDOWS</span></span>    <span class="token comment">// 如果 WINDOWS 宏被定义，就执行这里的内容</span><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">ifdef</span> <span class="token expression">LINUX</span></span>    <span class="token comment">// 如果 LINUX 宏被定义，执行这里的内容</span><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">else</span></span>    <span class="token comment">// 如果 LINUX 宏没有被定义，执行这里的内容</span><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ul><li>防止头文件被重复编译</li></ul><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">ifndef</span> <span class="token expression">_SOMEFILE_H_</span></span><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">_SOMEFILE_H_</span></span><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><ul><li>得到指定地址上的一个字节或字</li></ul><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name function">MEM_B</span><span class="token expression"><span class="token punctuation">(</span>x<span class="token punctuation">)</span>    <span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span><span class="token punctuation">(</span>byte<span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span></span></span><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name function">MEM_W</span><span class="token expression"><span class="token punctuation">(</span>x<span class="token punctuation">)</span>    <span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span><span class="token punctuation">(</span>word<span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><ul><li>常用的宏</li></ul><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token constant">__FILE__</span>  <span class="token comment">// 文件全路径</span>__FUNCTION__  <span class="token comment">// 函数名</span><span class="token constant">__LINE__</span>  <span class="token comment">// 行号</span><span class="token comment">// __FILE__ 过长，可以只获取文件名(运行期)</span><span class="token comment">// windows:</span><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">__FILENAME__</span> <span class="token expression"><span class="token punctuation">(</span><span class="token function">strrchr</span><span class="token punctuation">(</span></span><span class="token string">"\\"</span> <span class="token expression"><span class="token constant">__FILE__</span><span class="token punctuation">,</span> </span><span class="token char">'\\'</span><span class="token expression"><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span></span></span><span class="token comment">// linux:</span><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">__FILENAME__</span> <span class="token expression"><span class="token punctuation">(</span><span class="token function">strrchr</span><span class="token punctuation">(</span></span><span class="token string">"/"</span> <span class="token expression"><span class="token constant">__FILE__</span><span class="token punctuation">,</span> </span><span class="token char">'/'</span><span class="token expression"><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span></span></span><span class="token comment">// 编译期 未测试</span><span class="token comment">// 使用 cmake</span><span class="token comment">// set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D__FILENAME__='"$(notdir $&lt;)"'")</span><span class="token comment">// 使用 makefile</span><span class="token comment">// CXX_FLAGS+=-D__FILENAME__='\"$(subst $(SOURCE_PREFIX)/,,$(abspath $&lt;))\"'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
       
       
       <categories>
@@ -1133,7 +1095,7 @@
       
         <tags>
             
-            <tag> C </tag>
+            <tag> c </tag>
             
         </tags>
       
@@ -1146,7 +1108,7 @@
       <link href="/2020/07/10/9437.html"/>
       <url>/2020/07/10/9437.html</url>
       
-        <content type="html"><![CDATA[<h2 id="一、定义"><a href="#一、定义" class="headerlink" title="一、定义"></a>一、定义</h2><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token operator">*</span><span class="token function">func</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span><span class="token keyword">int</span> b<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>由于 * 的优先级低于 () 的优先级，因此 func 首先和后面的 () 结合，即 func 是一个函数，返回值的类型是 int*。</p><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span>pfunc<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>(*pfunc) 说明 <strong>pfunc是一个指针</strong>，然后后面跟着 ()，说明这个指针指向一个函数，即指向函数的指针。</p><ul><li><strong>函数指针：</strong>首先是一个指针，这个指针指向一个函数</li><li><strong>指针函数：</strong>首先是一个函数，这个函数的返回值一个指针</li></ul><h2 id="二、声明一个函数指针"><a href="#二、声明一个函数指针" class="headerlink" title="二、声明一个函数指针"></a>二、声明一个函数指针</h2><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span>pfunc<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span><span class="token keyword">int</span> b<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>当命名很多个函数指针的时候，用上面的方法显得非常不方便，所以可以这样写：</p><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span>PF<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>PF pfunc<span class="token punctuation">;</span><span class="token keyword">int</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span><span class="token punctuation">{</span>    <span class="token keyword">return</span> a <span class="token operator">+</span> b<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token keyword">int</span> <span class="token function">sub</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span><span class="token punctuation">{</span>    <span class="token keyword">return</span> a <span class="token operator">-</span> b<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>    PF pfunc <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>    pfunc <span class="token operator">=</span> add<span class="token punctuation">;</span>    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"add(3, 4): %d\n"</span><span class="token punctuation">,</span> <span class="token function">pfunc</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    pfunc <span class="token operator">=</span> sub<span class="token punctuation">;</span>    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"sub(3, 4): %d\n"</span><span class="token punctuation">,</span> <span class="token function">pfunc</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token comment">// 输出：</span><span class="token comment">// add(3, 4): 7</span><span class="token comment">// sub(3, 4): -1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h2 id="三、示例"><a href="#三、示例" class="headerlink" title="三、示例"></a>三、示例</h2><h3 id="示例1："><a href="#示例1：" class="headerlink" title="示例1："></a>示例1：</h3><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">void</span> <span class="token punctuation">(</span><span class="token operator">*</span>f<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>[] 的优先级比 * 的优先级高，所以 f 首先是修饰了数组，然后跟 * 组合，就说明这个数组里面都是指针，这个指针是一个函数，参数类型是 char*，返回值类型是 void。</p><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">void</span> <span class="token punctuation">(</span><span class="token operator">*</span>f<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token keyword">void</span> <span class="token function">print</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token operator">*</span> s<span class="token punctuation">)</span><span class="token punctuation">{</span>    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%s\n"</span><span class="token punctuation">,</span> s<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>    f<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> print<span class="token punctuation">;</span>    <span class="token punctuation">(</span><span class="token operator">*</span>f<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token string">"hello world"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token comment">// 输出：</span><span class="token comment">// hello world</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="示例2："><a href="#示例2：" class="headerlink" title="示例2："></a>示例2：</h3><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">void</span> <span class="token punctuation">(</span><span class="token operator">*</span>p<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>有个方法：<strong>右左原则</strong>，从 p 开始看，往右走直到遇到 )，再往左走遇到 (，(*p) 就可以看出 p 是一个指针，继续分析往右走，遇到 ()，说明 p 指向一个无参数的函数，往左走，p 指向的函数返回值是 void。</p><p>然后分析 <code>(*(void(*) ())0)();</code></p><ol><li>void(*)()：上面分析了这是一个函数指针，只是把 p 去掉了而已；</li><li>把上面的 void (*)() 用 PN 代替，上面的表达式变成 <code>(*(PN)0)();</code>，PN 后面有一个 0，想一下 (char)a; 这样的表达式，所以 *(PN)0 就是把 0 当成一个地址，强制转换为 PN 类型，用 * 取出这个地址区域的值；</li><li>把 (*(PN)0)() 替换成 PM，原来的表达式变成 PM()，这就是正常的函数调用。</li></ol><h3 id="示例3："><a href="#示例3：" class="headerlink" title="示例3："></a>示例3：</h3><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;string.h&gt;</span></span><span class="token keyword">char</span><span class="token operator">*</span> <span class="token function">func1</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token operator">*</span> p<span class="token punctuation">)</span><span class="token punctuation">{</span>    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%s\n"</span><span class="token punctuation">,</span> p<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token keyword">return</span> p<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token keyword">char</span><span class="token operator">*</span> <span class="token function">func2</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token operator">*</span> p<span class="token punctuation">)</span><span class="token punctuation">{</span>    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%s\n"</span><span class="token punctuation">,</span> p<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token keyword">return</span> p<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token keyword">char</span><span class="token operator">*</span> <span class="token function">func3</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token operator">*</span> p<span class="token punctuation">)</span><span class="token punctuation">{</span>    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%s\n"</span><span class="token punctuation">,</span> p<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token keyword">return</span> p<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>    <span class="token keyword">char</span><span class="token operator">*</span> <span class="token punctuation">(</span><span class="token operator">*</span>pf<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token operator">*</span> p<span class="token punctuation">)</span><span class="token punctuation">;</span>    pf<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> func1<span class="token punctuation">;</span>  <span class="token comment">// 可以直接用函数名</span>    pf<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">&amp;</span>func2<span class="token punctuation">;</span> <span class="token comment">// 可以用函数名加上取地址符</span>    pf<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">&amp;</span>func3<span class="token punctuation">;</span>    pf<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token string">"fun1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    pf<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token string">"fun2"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    pf<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token string">"fun3"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+        <content type="html"><![CDATA[<h2 id="一、定义"><a href="#一、定义" class="headerlink" title="一、定义"></a>一、定义</h2><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token operator">*</span><span class="token function">func</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>由于 * 的优先级低于 () 的优先级，因此 func 首先和后面的 () 结合，即 func 是一个函数，返回值的类型是 int*。</p><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span>pfunc<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>(*pfunc) 说明 <strong>pfunc是一个指针</strong>，然后后面跟着 ()，说明这个指针指向一个函数，即指向函数的指针。</p><ul><li><strong>函数指针：</strong>首先是一个指针，这个指针指向一个函数</li><li><strong>指针函数：</strong>首先是一个函数，这个函数的返回值一个指针</li></ul><h2 id="二、声明一个函数指针"><a href="#二、声明一个函数指针" class="headerlink" title="二、声明一个函数指针"></a>二、声明一个函数指针</h2><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span>pfunc<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>当命名很多个函数指针的时候，用上面的方法显得非常不方便，所以可以这样写：</p><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span>PF<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>PF pfunc<span class="token punctuation">;</span><span class="token keyword">int</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span><span class="token punctuation">{</span>    <span class="token keyword">return</span> a <span class="token operator">+</span> b<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token keyword">int</span> <span class="token function">sub</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span><span class="token punctuation">{</span>    <span class="token keyword">return</span> a <span class="token operator">-</span> b<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>    PF pfunc <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>    pfunc <span class="token operator">=</span> add<span class="token punctuation">;</span>    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"add(3, 4): %d\n"</span><span class="token punctuation">,</span> <span class="token function">pfunc</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    pfunc <span class="token operator">=</span> sub<span class="token punctuation">;</span>    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"sub(3, 4): %d\n"</span><span class="token punctuation">,</span> <span class="token function">pfunc</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token comment">// 输出：</span><span class="token comment">// add(3, 4): 7</span><span class="token comment">// sub(3, 4): -1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h2 id="三、示例"><a href="#三、示例" class="headerlink" title="三、示例"></a>三、示例</h2><h3 id="示例1："><a href="#示例1：" class="headerlink" title="示例1："></a>示例1：</h3><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">void</span> <span class="token punctuation">(</span><span class="token operator">*</span>f<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>[] 的优先级比 * 的优先级高，所以 f 首先是修饰了数组，然后跟 * 组合，就说明这个数组里面都是指针，这个指针是一个函数，参数类型是 char*，返回值类型是 void。</p><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">void</span> <span class="token punctuation">(</span><span class="token operator">*</span>f<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token keyword">void</span> <span class="token function">print</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token operator">*</span> s<span class="token punctuation">)</span><span class="token punctuation">{</span>    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%s\n"</span><span class="token punctuation">,</span> s<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>    f<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> print<span class="token punctuation">;</span>    <span class="token punctuation">(</span><span class="token operator">*</span>f<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token string">"hello world"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token comment">// 输出：</span><span class="token comment">// hello world</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="示例2："><a href="#示例2：" class="headerlink" title="示例2："></a>示例2：</h3><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">void</span> <span class="token punctuation">(</span><span class="token operator">*</span>p<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>有个方法：<strong>右左原则</strong>，从 p 开始看，往右走直到遇到 )，再往左走遇到 (，(*p) 就可以看出 p 是一个指针，继续分析往右走，遇到 ()，说明 p 指向一个无参数的函数，往左走，p 指向的函数返回值是 void。</p><p>然后分析 <code>(*(void(*) ())0)();</code></p><ol><li>void(*)()：上面分析了这是一个函数指针，只是把 p 去掉了而已；</li><li>把上面的 void (*)() 用 PN 代替，上面的表达式变成 <code>(*(PN)0)();</code>，PN 后面有一个 0，想一下 (char)a; 这样的表达式，所以 *(PN)0 就是把 0 当成一个地址，强制转换为 PN 类型，用 * 取出这个地址区域的值；</li><li>把 (*(PN)0)() 替换成 PM，原来的表达式变成 PM()，这就是正常的函数调用。</li></ol><h3 id="示例3："><a href="#示例3：" class="headerlink" title="示例3："></a>示例3：</h3><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;string.h&gt;</span></span><span class="token keyword">char</span><span class="token operator">*</span> <span class="token function">func1</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token operator">*</span> p<span class="token punctuation">)</span><span class="token punctuation">{</span>    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%s\n"</span><span class="token punctuation">,</span> p<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token keyword">return</span> p<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token keyword">char</span><span class="token operator">*</span> <span class="token function">func2</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token operator">*</span> p<span class="token punctuation">)</span><span class="token punctuation">{</span>    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%s\n"</span><span class="token punctuation">,</span> p<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token keyword">return</span> p<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token keyword">char</span><span class="token operator">*</span> <span class="token function">func3</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token operator">*</span> p<span class="token punctuation">)</span><span class="token punctuation">{</span>    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%s\n"</span><span class="token punctuation">,</span> p<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token keyword">return</span> p<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>    <span class="token keyword">char</span><span class="token operator">*</span> <span class="token punctuation">(</span><span class="token operator">*</span>pf<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token operator">*</span> p<span class="token punctuation">)</span><span class="token punctuation">;</span>    pf<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> func1<span class="token punctuation">;</span>  <span class="token comment">// 可以直接用函数名</span>    pf<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">&amp;</span>func2<span class="token punctuation">;</span> <span class="token comment">// 可以用函数名加上取地址符</span>    pf<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">&amp;</span>func3<span class="token punctuation">;</span>    pf<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token string">"fun1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    pf<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token string">"fun2"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    pf<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token string">"fun3"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
       
       
       <categories>
@@ -1158,7 +1120,7 @@
       
         <tags>
             
-            <tag> C </tag>
+            <tag> c </tag>
             
         </tags>
       
@@ -1183,7 +1145,7 @@
       
         <tags>
             
-            <tag> C </tag>
+            <tag> c </tag>
             
         </tags>
       
