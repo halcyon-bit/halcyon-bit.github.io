@@ -315,14 +315,14 @@ Futures 类：std::future，std::sha">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3.6k
+                    3.8k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    15 分
+                    16 分
                 </div>
                 
 
@@ -352,7 +352,7 @@ Futures 类：std::future，std::sha">
 <p>通过 get_future() 来获取与该 <code>std::promise</code> 对象相关联的 <code>std::future</code> 对象。</p>
 <ul>
 <li><code>std::promise</code> 对象是异步 Provider，它可以在某一时刻设置共享状态的值；</li>
-<li><code>std::future</code> 对象可以异步返回共享状态的值，或者在必要的情况下阻塞调用者并等待共享状态标志变为 ready，然后才能获取共享状态的值。</li>
+<li><code>std::future</code> 对象可以异步返回共享状态的值，或者在必要的情况下阻塞调用者并等待共享状态标志变为 ready，然后获取共享状态的值。</li>
 </ul>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;thread&gt;</span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;future&gt;</span></span>
@@ -386,9 +386,16 @@ Futures 类：std::future，std::sha">
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="成员函数"><a href="#成员函数" class="headerlink" title="成员函数"></a>成员函数</h4><h5 id="1-1-get-future"><a href="#1-1-get-future" class="headerlink" title="1.1 get_future()"></a>1.1 get_future()</h5><p>该函数返回一个与 promise 共享状态相关联的 future。返回的 future 对象可以访问由 promise 对象设置在共享状态上的值或者某个异常对象。只能从 promise 共享状态获取一个 future 对象。在调用该函数之后，promise 对象通常会在某个时间点准备好（设置一个值或者一个异常对象），如果不设置值或者异常，promise 对象在析构时会自动地设置一个 future_error 异常（broken_promise）来设置其自身的准备状态。</p>
-<h5 id="1-2-set-value"><a href="#1-2-set-value" class="headerlink" title="1.2 set_value()"></a>1.2 set_value()</h5><p>设置共享状态的值，promise 的共享状态标志变为 ready。</p>
-<h5 id="1-3-set-exception"><a href="#1-3-set-exception" class="headerlink" title="1.3 set_exception()"></a>1.3 set_exception()</h5><p>为 promise 设置异常，promise 的共享状态变标志变为 ready。</p>
+<h4 id="1-1-get-future"><a href="#1-1-get-future" class="headerlink" title="1.1 get_future()"></a>1.1 get_future()</h4><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">std<span class="token double-colon punctuation">::</span>future<span class="token operator">&lt;</span>R<span class="token operator">&gt;</span> <span class="token function">get_future</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>返回一个与 promise 共享状态相关联的 future。返回的 future 对象可以访问由 promise 对象设置在共享状态上的值或者某个异常对象。只能从 promise 共享状态获取一个 future 对象。在调用该函数之后，promise 对象通常会在某个时间点准备好（设置一个值或者一个异常对象），如果不设置值或者异常，promise 对象在析构时会自动地设置一个 future_error 异常（broken_promise）来设置其自身的准备状态。</p>
+<h4 id="1-2-set-value"><a href="#1-2-set-value" class="headerlink" title="1.2 set_value()"></a>1.2 set_value()</h4><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">set_value</span><span class="token punctuation">(</span><span class="token keyword">const</span> R<span class="token operator">&amp;</span> value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">set_value</span><span class="token punctuation">(</span>R<span class="token operator">&amp;&amp;</span> value<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>设置共享状态的值，promise 的共享状态标志变为 ready。</p>
+<h4 id="1-3-set-exception"><a href="#1-3-set-exception" class="headerlink" title="1.3 set_exception()"></a>1.3 set_exception()</h4><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">set_exception</span><span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span>exception_ptr p<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>设置异常，promise 的共享状态变标志变为 ready。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;thread&gt;</span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;future&gt;</span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
@@ -432,8 +439,42 @@ Futures 类：std::future，std::sha">
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h5 id="1-4-set-value-at-thread-exit"><a href="#1-4-set-value-at-thread-exit" class="headerlink" title="1.4 set_value_at_thread_exit()"></a>1.4 set_value_at_thread_exit()</h5><p>设置共享状态的值，但是不将共享状态的标志设置为 ready，当线程退出时该 promise 对象会自动设置为 ready。如果某个 future 对象与该 promise 对象的共享状态相关联，并且该 future 正在调用 get，则调用 get 的线程会被阻塞，当线程退出时，调用 future::get 的线程解除阻塞，同时 get 返回 set_value_at_thread_exit 所设置的值。</p>
-<p>注意，该函数已经设置了 promise 共享状态的值，如果在线程结束之前有其他设置或者修改共享状态的值的操作，则会抛出 future_error(promise_already_satisfied)。</p>
+<h4 id="1-4-set-value-at-thread-exit"><a href="#1-4-set-value-at-thread-exit" class="headerlink" title="1.4 set_value_at_thread_exit()"></a>1.4 set_value_at_thread_exit()</h4><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">set_value_at_thread_exit</span><span class="token punctuation">(</span><span class="token keyword">const</span> R<span class="token operator">&amp;</span> value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">set_value_at_thread_exit</span><span class="token punctuation">(</span>R<span class="token operator">&amp;&amp;</span> value<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>设置共享状态的值，但是不将共享状态的标志设置为 ready，当线程退出时该 promise 对象会自动设置为 ready。如果某个 future 对象与该 promise 对象的共享状态相关联，并且该 future 正在调用 get，则调用 get 的线程会被阻塞，当线程退出时，调用 <code>future::get</code> 的线程解除阻塞，同时 get 返回 <code>set_value_at_thread_exit</code> 所设置的值。</p>
+<p>注意：该函数已经设置了 promise 共享状态的值，如果在线程结束之前有其他设置或者修改共享状态的值的操作，则会抛出 future_error(promise_already_satisfied)。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;thread&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;future&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+
+<span class="token keyword">void</span> <span class="token function">set</span><span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span>promise<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span><span class="token operator">&amp;</span> prom<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    prom<span class="token punctuation">.</span><span class="token function">set_value_at_thread_exit</span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">get</span><span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span>future<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span><span class="token operator">&amp;</span> fut<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> x <span class="token operator">=</span> fut<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"value: "</span> <span class="token operator">&lt;&lt;</span> x <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token double-colon punctuation">::</span>promise<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> prom<span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>future<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> fut <span class="token operator">=</span> prom<span class="token punctuation">.</span><span class="token function">get_future</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    std<span class="token double-colon punctuation">::</span>thread <span class="token function">th1</span><span class="token punctuation">(</span>set<span class="token punctuation">,</span> std<span class="token double-colon punctuation">::</span><span class="token function">ref</span><span class="token punctuation">(</span>prom<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>thread <span class="token function">th2</span><span class="token punctuation">(</span>get<span class="token punctuation">,</span> std<span class="token double-colon punctuation">::</span><span class="token function">ref</span><span class="token punctuation">(</span>fut<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    th1<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    th2<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="1-5-set-exception-at-thread-exit"><a href="#1-5-set-exception-at-thread-exit" class="headerlink" title="1.5 set_exception_at_thread_exit()"></a>1.5 set_exception_at_thread_exit()</h4><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">set_exception_at_thread_exit</span><span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span>exception_ptr p<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>设置异常值，但是不将共享状态的标志设置为 ready，当线程退出时该 promise 对象会自动设置为 ready。作用同 <code>set_value_at_thread_exit()</code>。</p>
 <h3 id="2-std-packaged-task"><a href="#2-std-packaged-task" class="headerlink" title="2. std::packaged_task"></a>2. std::packaged_task</h3><p><code>std::packaged_task</code><strong>包装一个可调用的对象</strong>，并且允许异步获取该可调用对象产生的结果。</p>
 <p><code>std::packaged_task</code>对象内部包含了两个最基本元素：</p>
 <ul>
@@ -443,9 +484,9 @@ Futures 类：std::future，std::sha">
 <p>通过 <code>std::packaged_task::get_future</code> 来获取与共享状态相关联的 <code>std::future</code> 对象。在调用该函数之后，两个对象共享相同的状态：</p>
 <ul>
 <li><code>std::packaged_task</code> 对象是异步 Provider，它在某一时刻通过调用被包装的任务来设置共享状态的值；</li>
-<li><code>std::future</code> 对象是一个异步返回对象，通过它可以获得共享状态的值，当然在必要的时候需要等待共享状态标志变为 ready。</li>
+<li><code>std::future</code> 对象是一个异步返回对象，通过它可以获得共享状态的值，在必要的时候需要等待共享状态标志变为 ready。</li>
 </ul>
-<p><code>std::packaged_task</code> 的共享状态的生命周期一直持续到最后一个与之相关联的对象被释放或者销毁为止。同样禁止拷贝，支持移动语义。</p>
+<p><code>std::packaged_task</code> 共享状态的生命周期一直持续到最后一个与之相关联的对象被释放或者销毁为止，同样禁止拷贝，支持移动语义。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;future&gt;</span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;thread&gt;</span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
@@ -467,26 +508,36 @@ Futures 类：std::future，std::sha">
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="成员函数-1"><a href="#成员函数-1" class="headerlink" title="成员函数"></a>成员函数</h4><h5 id="2-1-valid"><a href="#2-1-valid" class="headerlink" title="2.1 valid()"></a>2.1 valid()</h5><p>检查当前 packaged_task 是否和一个有效的共享状态相关联，对于由默认构造函数生成的 packaged_task 对象，该函数返回 false。</p>
-<h5 id="2-2-get-future"><a href="#2-2-get-future" class="headerlink" title="2.2 get_future()"></a>2.2 get_future()</h5><p>返回一个与 packaged_task 对象共享状态相关的 future 对象，返回的 future 对象可以获得在该 packaged_task 对象的共享状态上设置的某个值或者异常。</p>
-<h5 id="2-3-operator-Args…-args"><a href="#2-3-operator-Args…-args" class="headerlink" title="2.3 operator()(Args… args)"></a>2.3 operator()(Args… args)</h5><p>调用该 packaged_task 对象所包装的对象（通常为函数指针，函数对象，lambda 表达式等），传入的参数为 args，调用该函数一般会发生两种情况：</p>
+<h4 id="2-1-valid"><a href="#2-1-valid" class="headerlink" title="2.1 valid()"></a>2.1 valid()</h4><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">bool</span> <span class="token function">valid</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token keyword">noexcept</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>检查当前 packaged_task 是否和一个有效的共享状态相关联，对于由默认构造函数生成的 packaged_task 对象，该函数返回 false。</p>
+<h4 id="2-2-get-future"><a href="#2-2-get-future" class="headerlink" title="2.2 get_future()"></a>2.2 get_future()</h4><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">std<span class="token double-colon punctuation">::</span>future<span class="token operator">&lt;</span>R<span class="token operator">&gt;</span> <span class="token function">get_future</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>返回一个与 packaged_task 对象共享状态相关的 future 对象，返回的 future 对象可以获得在该 packaged_task 对象的共享状态上设置的某个值或者异常。</p>
+<h4 id="2-3-operator"><a href="#2-3-operator" class="headerlink" title="2.3 operator()"></a>2.3 operator()</h4><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token keyword">operator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">(</span>ArgTypes<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>调用该 packaged_task 对象所包装的对象（通常为函数指针，函数对象，lambda 表达式等），传入的参数为 args，调用该函数一般会发生两种情况：</p>
 <ul>
 <li>如果调用 packaged_task 所包装的对象成功，则返回值（如果被包装的对象有返回值的话）被保存在 packaged_task 的共享状态中；</li>
 <li>如果调用 packaged_task 所包装的对象失败，并且抛出了异常，则异常也会被保存在 packaged_task 的共享状态中。</li>
 </ul>
 <p>以上两种情况都使共享状态的标志变为 ready，因此其他等待该共享状态的线程可以获取共享状态的值或者异常并继续执行下去。</p>
-<p>共享状态的值可以通过future对象（由 get_future 获得）调用 get 来获得。</p>
+<p>共享状态的值可以通过 future 对象（由 get_future 获得）调用 get 来获得。</p>
 <p>由于被包装的任务在 packaged_task 构造时指定，因此调用 operator() 的效果由 packaged_task 对象构造时所指定的可调用对象来决定：</p>
 <ul>
 <li>如果被包装的任务是函数指针或者函数对象，调用 operator() 只是将参数传递给被包装的对象；</li>
 <li>如果被包装的任务是指向类的非静态成员函数的指针，那么 operator() 的第一个参数应该指定为成员函数被调用的那个对象，剩余的参数作为该成员函数的参数；</li>
 <li>如果被包装的任务是指向类的非静态成员变量，那么 operator() 只允许单个参数。</li>
 </ul>
-<h5 id="2-4-make-ready-at-thread-exit"><a href="#2-4-make-ready-at-thread-exit" class="headerlink" title="2.4 make_ready_at_thread_exit()"></a>2.4 make_ready_at_thread_exit()</h5><p>该函数会调用被包装的任务，并向任务传递参数，类似 operator() 成员函数。但是与 operator() 函数不同的是，make_ready_at_thread_exit 并不会立即设置共享状态的标志为 ready，而是在线程退出时设置共享状态的标志。</p>
-<p>如果与该 packaged_task 共享状态相关联的 future 对象调用 future::get()，则该函数会被阻塞，直到 packaged_task 所在线程退出。</p>
-<p>注意，该函数已经设置了 promise 共享状态的值，如果在线程结束之前有其他设置或者修改共享状态的值的操作，则会抛出 future_error(promise_already_satisfied)。</p>
-<h5 id="2-5-reset"><a href="#2-5-reset" class="headerlink" title="2.5 reset()"></a>2.5 reset()</h5><p>重置 packaged_task 的共享状态，但是保留之前被包装的任务。</p>
-<h5 id="2-6-示例"><a href="#2-6-示例" class="headerlink" title="2.6 示例"></a>2.6 示例</h5><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;future&gt;</span></span>
+<h4 id="2-4-make-ready-at-thread-exit"><a href="#2-4-make-ready-at-thread-exit" class="headerlink" title="2.4 make_ready_at_thread_exit()"></a>2.4 make_ready_at_thread_exit()</h4><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">make_ready_at_thread_exit</span><span class="token punctuation">(</span>ArgTypes<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>该函数会调用被包装的任务，并向任务传递参数，类似 operator() 成员函数。但是与 operator() 函数不同的是，<code>make_ready_at_thread_exit</code> 并不会立即设置共享状态的标志为 ready，而是在线程退出时设置共享状态的标志。</p>
+<p>如果与该 packaged_task 共享状态相关联的 future 对象调用 <code>future::get</code>，则该函数会被阻塞，直到 packaged_task 所在线程退出。</p>
+<p>注意：该函数已经设置了 promise 共享状态的值，如果在线程结束之前有其他设置或者修改共享状态的值的操作，则会抛出 future_error(promise_already_satisfied)。</p>
+<h4 id="2-5-reset"><a href="#2-5-reset" class="headerlink" title="2.5 reset()"></a>2.5 reset()</h4><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">void reset();<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>重置 packaged_task 的共享状态，但是保留之前被包装的任务。</p>
+<h4 id="2-6-示例"><a href="#2-6-示例" class="headerlink" title="2.6 示例"></a>2.6 示例</h4><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;future&gt;</span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;thread&gt;</span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
 
@@ -518,8 +569,8 @@ std<span class="token double-colon punctuation">::</span>packaged_task<span clas
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="3-std-future"><a href="#3-std-future" class="headerlink" title="3. std::future"></a>3. std::future</h3><p><code>std::future</code>可以用来获取异步任务的结果，因此可以把它当成一种简单的线程间同步的手段。std::future 通常由某个 Provider 创建，可以把 Provider 想象成一个异步任务的提供者，Provider 在某个线程中设置共享状态的值，与该共享状态相关联的 <code>std::future</code> 对象调用 get（通常在另外一个线程中）获取该值，如果共享状态的标志不为 ready，则调用 get 会阻塞当前的调用者，直到 Provider 设置了共享状态的值（此时共享状态的标志变为 ready），get 返回异步任务的值或异常（如果发生了异常）。</p>
-<p>一个有效的 <code>std::future</code> 对象通常由以下三种 Provider 创建，并和某个共享状态相关联。Provider 可以是函数或者类，分别是：</p>
+<h3 id="3-std-future"><a href="#3-std-future" class="headerlink" title="3. std::future"></a>3. std::future</h3><p><code>std::future</code>可以用来获取异步任务的结果，因此可以把它当成一种简单的线程间同步的手段。<code>std::future</code> 通常由某个 Provider 创建，可以把 Provider 想象成一个异步任务的提供者，Provider 在某个线程中设置共享状态的值，与该共享状态相关联的 <code>std::future</code> 对象调用 get（通常在另外一个线程中）获取该值，如果共享状态的标志不为 ready，则调用 get 会阻塞当前的调用者，直到 Provider 设置了共享状态的值（此时共享状态的标志变为 ready），get 返回异步任务的值或异常（如果发生了异常）。</p>
+<p><code>std::future</code> 对象通常由以下三种 Provider 创建，并和某个共享状态相关联。Provider 可以是函数或者类，分别是：</p>
 <ul>
 <li><code>std::async()</code>；</li>
 <li><code>std::promise::get_future()</code>；</li>
@@ -554,11 +605,22 @@ std<span class="token double-colon punctuation">::</span>packaged_task<span clas
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="成员函数-2"><a href="#成员函数-2" class="headerlink" title="成员函数"></a>成员函数</h4><h5 id="3-1-share"><a href="#3-1-share" class="headerlink" title="3.1 share()"></a>3.1 share()</h5><p>返回一个 <code>std::shared_future</code> 对象，调用该函数之后，该 future 对象本身已经不和任何共享状态相关联，因此该 future 的状态不再是 valid 的。</p>
-<h5 id="3-2-get"><a href="#3-2-get" class="headerlink" title="3.2 get()"></a>3.2 get()</h5><p>当与该 future 对象相关联的共享状态标志变为 ready 后，调用该函数将返回保存在共享状态中的值，如果共享状态的标志不为 ready，则调用该函数会阻塞当前的调用者，而此后一旦共享状态的标志变为 ready，get 返回 Provider 所设置的共享状态的值或者异常（如果抛出了异常）。</p>
-<h5 id="3-3-valid"><a href="#3-3-valid" class="headerlink" title="3.3 valid()"></a>3.3 valid()</h5><p>检查当前的 <code>std::future</code> 对象是否有效。</p>
-<h5 id="3-4-wait"><a href="#3-4-wait" class="headerlink" title="3.4 wait()"></a>3.4 wait()</h5><p>等待与当前 future 对象相关联的共享状态的标志变为 ready。如果共享状态的标志不是 ready，调用该函数的线程会被阻塞，直到共享状态的标志变为 ready。一旦共享状态的标志变为 ready，wait函数返回，当前线程被解除阻塞，但是 wait 并不读取共享状态的值或者异常信息。</p>
-<h5 id="3-5-wait-for"><a href="#3-5-wait-for" class="headerlink" title="3.5 wait_for()"></a>3.5 wait_for()</h5><p>与 wait() 的功能类似，即等待与该 future 对象相关联的共享状态的标志变为 ready，而与 wait() 不同的是，wait_for() 可以设置一个时间段 rel_time，如果共享状态的标志在该时间段结束之前没有被 Provider 设置为 ready，则调用 wait_for 的线程被阻塞，在等待了 rel_time 的时间长度后 wait_for() 返回，返回值如下：</p>
+<h4 id="3-1-share"><a href="#3-1-share" class="headerlink" title="3.1 share()"></a>3.1 share()</h4><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">std<span class="token double-colon punctuation">::</span>shared_future<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span> <span class="token function">share</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">noexcept</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>返回一个 <code>std::shared_future</code> 对象，调用该函数之后，该 future 对象本身已经不和任何共享状态相关联，因此该 future 的状态不再是 valid 的。</p>
+<h4 id="3-2-get"><a href="#3-2-get" class="headerlink" title="3.2 get()"></a>3.2 get()</h4><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">T <span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>当与该 future 对象相关联的共享状态标志变为 ready 后，调用该函数将返回保存在共享状态中的值，如果共享状态的标志不为 ready，则调用该函数会阻塞当前的调用者，而此后一旦共享状态的标志变为 ready，get 返回 Provider 所设置的共享状态的值或者异常（如果抛出了异常）。</p>
+<h4 id="3-3-valid"><a href="#3-3-valid" class="headerlink" title="3.3 valid()"></a>3.3 valid()</h4><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">bool</span> <span class="token function">valid</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token keyword">noexcept</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>检查当前的 <code>std::future</code> 对象是否有效。</p>
+<h4 id="3-4-wait"><a href="#3-4-wait" class="headerlink" title="3.4 wait()"></a>3.4 wait()</h4><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">wait</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>等待与当前 future 对象相关联的共享状态的标志变为 ready。如果共享状态的标志不是 ready，调用该函数的线程会被阻塞，直到共享状态的标志变为 ready。一旦共享状态的标志变为 ready，wait 函数返回，当前线程被解除阻塞，但是 wait 并不读取共享状态的值或者异常信息。</p>
+<h4 id="3-5-wait-for"><a href="#3-5-wait-for" class="headerlink" title="3.5 wait_for()"></a>3.5 wait_for()</h4><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">template</span><span class="token operator">&lt;</span><span class="token keyword">class</span> <span class="token class-name">Rep</span><span class="token punctuation">,</span> <span class="token keyword">class</span> <span class="token class-name">Period</span><span class="token operator">&gt;</span>
+std<span class="token double-colon punctuation">::</span>future_status <span class="token function">wait_for</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token double-colon punctuation">::</span>chrono<span class="token double-colon punctuation">::</span>duration<span class="token operator">&lt;</span>Rep<span class="token punctuation">,</span>Period<span class="token operator">&gt;</span><span class="token operator">&amp;</span> timeout_duration<span class="token punctuation">)</span> <span class="token keyword">const</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>与 wait() 的功能类似，不同的是，wait_for() 可以设置一个时间段 rel_time，如果共享状态的标志在该时间段结束之前没有被 Provider 设置为 ready，则调用 wait_for 的线程被阻塞，在等待了 rel_time 时间后 wait_for() 返回，返回值如下：</p>
 <table>
 <thead>
 <tr>
@@ -579,9 +641,12 @@ std<span class="token double-colon punctuation">::</span>packaged_task<span clas
 <td>共享状态包含一个 deferred 函数</td>
 </tr>
 </tbody></table>
-<h5 id="3-6-wait-until"><a href="#3-6-wait-until" class="headerlink" title="3.6 wait_until()"></a>3.6 wait_until()</h5><p>与 wait_for() 类似，不同的是设置一个绝对时间点 abs_time。</p>
+<h4 id="3-6-wait-until"><a href="#3-6-wait-until" class="headerlink" title="3.6 wait_until()"></a>3.6 wait_until()</h4><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">template</span><span class="token operator">&lt;</span><span class="token keyword">class</span> <span class="token class-name">Clock</span><span class="token punctuation">,</span> <span class="token keyword">class</span> <span class="token class-name">Duration</span><span class="token operator">&gt;</span>
+std<span class="token double-colon punctuation">::</span>future_status <span class="token function">wait_until</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token double-colon punctuation">::</span>chrono<span class="token double-colon punctuation">::</span>time_point<span class="token operator">&lt;</span>Clock<span class="token punctuation">,</span>Duration<span class="token operator">&gt;</span><span class="token operator">&amp;</span> timeout_time<span class="token punctuation">)</span> <span class="token keyword">const</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>与 wait_for() 类似，不同的是设置一个绝对时间点 abs_time。</p>
 <h3 id="4-std-shared-future"><a href="#4-std-shared-future" class="headerlink" title="4. std::shared_future"></a>4. std::shared_future</h3><p><code>std::shared_future</code> 与 <code>std::future</code> 类似，但是 <code>std::shared_future</code> 可以拷贝，多个 <code>std::shared_future</code> 可以共享某个共享状态的最终结果（即共享状态的某个值或者异常）。<code>std::shared_future</code> 可以通过某个 <code>std::future</code> 对象隐式转换（参见 <code>std::shared_future</code> 的构造函数），或者通过 <code>std::future::share()</code> 显示转换，无论哪种转换，被转换的那个 future 对象都会变为 not-valid。</p>
-<h2 id="二、std-async"><a href="#二、std-async" class="headerlink" title="二、std::async"></a>二、std::async</h2><p><code>std::async</code> 是比 <code>std::future</code>，<code>std::packaged_task</code>，<code>std::promise</code> 更上层，它是基于任务的异步操作，它可以用来直接创建异步的 task，异步任务返回的结果保存在 <code>std::future</code> 中，当需要获取线程执行的结果，可以通过 future.get() 来获取，如果不关注异步任务的结果，只是简单的等待任务执行完成，则调用 future.wait() 即可。</p>
+<h2 id="二、std-async"><a href="#二、std-async" class="headerlink" title="二、std::async"></a>二、std::async</h2><p><code>std::async</code> 是比 <code>std::future</code>，<code>std::packaged_task</code>，<code>std::promise</code> 更上层，它是基于任务的异步操作，可以用来直接创建异步的 task，异步任务返回的结果保存在 <code>std::future</code> 中，当需要获取线程执行的结果，可以通过 <code>future::get</code> 来获取，如果不关注异步任务的结果，只是简单的等待任务执行完成，则调用 <code>future::wait</code> 即可。</p>
 <p>async 是更高层次的异步操作，不关心线程创建的内部细节，就能方便的获取线程异步执行的结果，还可以指定线程创建策略，更多的时候应该使用 <code>std::async</code> 来创建线程，成为异步操作的首选。</p>
 <p>具体语法如下：</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">std<span class="token double-colon punctuation">::</span><span class="token function">async</span><span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span>launch<span class="token double-colon punctuation">::</span>async <span class="token operator">|</span> std<span class="token double-colon punctuation">::</span>launch<span class="token double-colon punctuation">::</span>deferred<span class="token punctuation">,</span> func<span class="token punctuation">,</span> args<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -632,7 +697,7 @@ std<span class="token double-colon punctuation">::</span><span class="token func
 
 <p>异步任务的封装：</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">template</span><span class="token operator">&lt;</span><span class="token keyword">typename</span> <span class="token class-name">F</span><span class="token punctuation">,</span> <span class="token keyword">typename</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> Args<span class="token operator">&gt;</span>
-<span class="token keyword">inline</span> <span class="token keyword">auto</span> <span class="token function">createAsync</span><span class="token punctuation">(</span>F<span class="token operator">&amp;&amp;</span> f<span class="token punctuation">,</span> Args<span class="token operator">&amp;&amp;</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> params<span class="token punctuation">)</span>
+<span class="token keyword">inline</span> <span class="token keyword">auto</span> <span class="token function">create_async</span><span class="token punctuation">(</span>F<span class="token operator">&amp;&amp;</span> f<span class="token punctuation">,</span> Args<span class="token operator">&amp;&amp;</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> params<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token keyword">return</span> std<span class="token double-colon punctuation">::</span><span class="token function">async</span><span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span>launch<span class="token double-colon punctuation">::</span>async<span class="token punctuation">,</span> std<span class="token double-colon punctuation">::</span><span class="token generic-function"><span class="token function">forward</span><span class="token generic class-name"><span class="token operator">&lt;</span>F<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>f<span class="token punctuation">)</span><span class="token punctuation">,</span> std<span class="token double-colon punctuation">::</span><span class="token generic-function"><span class="token function">forward</span><span class="token generic class-name"><span class="token operator">&lt;</span>Args<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>params<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
