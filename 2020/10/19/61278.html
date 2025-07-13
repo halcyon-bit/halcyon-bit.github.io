@@ -357,7 +357,7 @@
 <span class="token punctuation">{</span>
     <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">turing</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
     <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">dijkstra</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">vneumann</span><span class="token punctuation">(</span><span class="token keyword">int</span> g<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">vneumann</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
     <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">dknuth</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span><span class="token punctuation">;</span>
     <span class="token keyword">void</span> <span class="token function">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
@@ -369,7 +369,7 @@
 <span class="token punctuation">{</span>
     <span class="token keyword">void</span> <span class="token function">turing</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">override</span><span class="token punctuation">;</span>
     <span class="token keyword">void</span> <span class="token function">dikjstra</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">override</span><span class="token punctuation">;</span>  <span class="token comment">// 无法通过编译，拼写错误，并非虚函数重写</span>
-    <span class="token keyword">void</span> <span class="token function">vneumann</span><span class="token punctuation">(</span><span class="token keyword">double</span> g<span class="token punctuation">)</span> <span class="token keyword">override</span><span class="token punctuation">;</span>  <span class="token comment">// 无法通过编译，参数不一致，并非虚函数重写</span>
+    <span class="token keyword">void</span> <span class="token function">vneumann</span><span class="token punctuation">(</span><span class="token keyword">double</span> f<span class="token punctuation">)</span> <span class="token keyword">override</span><span class="token punctuation">;</span>  <span class="token comment">// 无法通过编译，参数不一致，并非虚函数重写</span>
     <span class="token keyword">void</span> <span class="token function">dknuth</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">override</span><span class="token punctuation">;</span>  <span class="token comment">// 无法通过编译，常量性不一致，并非虚函数重写</span>
     <span class="token keyword">void</span> <span class="token function">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">override</span><span class="token punctuation">;</span>  <span class="token comment">// 无法通过编译，非虚函数重写</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
@@ -408,10 +408,11 @@
     <span class="token function">Test</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">a</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     Test t<span class="token punctuation">;</span>  <span class="token comment">// error</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>上面代码编译出错，因为没有匹配的构造函数，编译器没有生成默认构造函数，而通过 <code>default</code>，只需在函数声明后加上“<code>=default;</code>”，编译器将为显式声明的 <code>default</code> 函数自动生成函数体：</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Test</span>
@@ -422,10 +423,11 @@
     <span class="token function">Test</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">a</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     Test t<span class="token punctuation">;</span>  <span class="token comment">// ok</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="三、delete"><a href="#三、delete" class="headerlink" title="三、delete"></a>三、delete</h2><p>C++ 中，如果没有定义特殊成员函数，那么编译器在需要特殊成员函数时候会隐式自动生成一个默认的特殊成员函数，例如拷贝构造函数或者拷贝赋值操作符。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Test</span>
@@ -436,13 +438,14 @@
     <span class="token function">Test</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">a</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     Test t1<span class="token punctuation">;</span>
     Test t2 <span class="token operator">=</span> t1<span class="token punctuation">;</span>  <span class="token comment">// ok, 调用编译器隐式生成的默认拷贝构造函数</span>
     Test t3<span class="token punctuation">;</span>
     t3 <span class="token operator">=</span> t1<span class="token punctuation">;</span>  <span class="token comment">// ok, 调用编译器隐式生成的默认拷贝赋值操作符</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>而有时候想禁止对象的拷贝与赋值，可以使用 <code>delete</code> 修饰，也可以将拷贝和赋值的函数声明为 private。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Test</span>
@@ -455,13 +458,14 @@
     <span class="token function">Test</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">a</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     Test t1<span class="token punctuation">;</span>
     Test t2 <span class="token operator">=</span> t1<span class="token punctuation">;</span>  <span class="token comment">// error, 拷贝构造函数被禁用</span>
     Test t3<span class="token punctuation">;</span>
     t3 <span class="token operator">=</span> t1<span class="token punctuation">;</span>  <span class="token comment">// error, 拷贝赋值操作符被禁用</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><code>delete</code> 在 C++11 中很常用，<code>std::unique_ptr</code> 就是通过 <code>delete</code> 修饰来禁止对象的拷贝的。单例模式也可以通过该方法实现。</p>
 <h2 id="四、explicit"><a href="#四、explicit" class="headerlink" title="四、explicit"></a>四、explicit</h2><p><code>explicit</code> 用于修饰构造函数，表示只能显式构造，不可以被隐式转换，也可以用在类型转换函数上。</p>
@@ -515,17 +519,17 @@
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Test</span> 
 <span class="token punctuation">{</span>
 <span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token function">Test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">Init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
-    <span class="token function">Test</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">Test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> type <span class="token operator">=</span> i<span class="token punctuation">;</span> <span class="token punctuation">}</span>
-    <span class="token function">Test</span><span class="token punctuation">(</span><span class="token keyword">char</span> e<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">Test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> name <span class="token operator">=</span> e<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token function">Test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token function">Test</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">Test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> type_ <span class="token operator">=</span> i<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token function">Test</span><span class="token punctuation">(</span><span class="token keyword">char</span> e<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">Test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> name_ <span class="token operator">=</span> e<span class="token punctuation">;</span> <span class="token punctuation">}</span>
 
 <span class="token keyword">private</span><span class="token operator">:</span>
-    <span class="token keyword">void</span> <span class="token function">Init</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-    <span class="token keyword">int</span> type<span class="token punctuation">{</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
-    <span class="token keyword">char</span> name<span class="token punctuation">{</span> <span class="token char">'a'</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">void</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token keyword">int</span> type_<span class="token punctuation">{</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">char</span> name_<span class="token punctuation">{</span> <span class="token char">'a'</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>委派构造函数只能在函数体中为 type、name 等成员变量赋初值。这是由于委派构造函数不能有初始化列表造成的，在 C++11 中，<strong>构造函数不能同时“委派”和使用初始化列表</strong>，所以如果委派构造函数要给变量赋初值，初始化代码必须放在函数体中。</p>
+<p>委派构造函数只能在函数体中为 type_、name_ 等成员变量赋初值。这是由于委派构造函数不能有初始化列表造成的，在 C++11 中，<strong>构造函数不能同时“委派”和使用初始化列表</strong>，所以如果委派构造函数要给变量赋初值，初始化代码必须放在函数体中。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Test</span>
 <span class="token punctuation">{</span>
 <span class="token keyword">public</span><span class="token operator">:</span>
@@ -534,9 +538,9 @@
     <span class="token function">Test</span><span class="token punctuation">(</span><span class="token keyword">char</span> e<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">Test</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 
 <span class="token keyword">private</span><span class="token operator">:</span>
-    <span class="token function">Test</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token punctuation">,</span> <span class="token keyword">char</span> e<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">type</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">name</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-    <span class="token keyword">int</span> type<span class="token punctuation">{</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
-    <span class="token keyword">char</span> name<span class="token punctuation">{</span> <span class="token char">'a'</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token function">Test</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token punctuation">,</span> <span class="token keyword">char</span> e<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">type_</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">name_</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token keyword">int</span> type_<span class="token punctuation">{</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">char</span> name_<span class="token punctuation">{</span> <span class="token char">'a'</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="六、继承构造函数"><a href="#六、继承构造函数" class="headerlink" title="六、继承构造函数"></a>六、继承构造函数</h2><p>如果派生类要使用基类的构造函数，通常需要在构造函数中显式声明。</p>
@@ -556,8 +560,7 @@
     <span class="token function">Derived</span><span class="token punctuation">(</span><span class="token keyword">double</span> d<span class="token punctuation">,</span> <span class="token keyword">int</span> i<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">Base</span><span class="token punctuation">(</span>d<span class="token punctuation">,</span> i<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
     <span class="token function">Derived</span><span class="token punctuation">(</span><span class="token keyword">float</span> f<span class="token punctuation">,</span> <span class="token keyword">int</span> i<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>c<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">Base</span><span class="token punctuation">(</span>f<span class="token punctuation">,</span> i<span class="token punctuation">,</span> c<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
     <span class="token comment">// ...</span>
-    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">ExtraInterface</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>在 C++ 中，如果派生类要使用<strong>基类的成员函数（非虚函数）</strong>，可以通过 using 声明完成。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
@@ -565,7 +568,7 @@
 <span class="token keyword">class</span> <span class="token class-name">Base</span>
 <span class="token punctuation">{</span>
 <span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token keyword">double</span> i<span class="token punctuation">)</span>
+    <span class="token keyword">void</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token keyword">double</span> i<span class="token punctuation">)</span>
     <span class="token punctuation">{</span>
         std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Base: "</span> <span class="token operator">&lt;&lt;</span> i <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
@@ -574,8 +577,8 @@
 <span class="token keyword">class</span> <span class="token class-name">Derived</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token keyword">public</span> <span class="token class-name">Base</span></span>
 <span class="token punctuation">{</span>
 <span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token keyword">using</span> Base<span class="token double-colon punctuation">::</span>f<span class="token punctuation">;</span>
-    <span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token punctuation">)</span>
+    <span class="token keyword">using</span> Base<span class="token double-colon punctuation">::</span>func<span class="token punctuation">;</span>
+    <span class="token keyword">void</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token punctuation">)</span>
     <span class="token punctuation">{</span>
         std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Derived:"</span> <span class="token operator">&lt;&lt;</span> i <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
@@ -584,13 +587,13 @@
 <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     Base b<span class="token punctuation">;</span>
-    b<span class="token punctuation">.</span><span class="token function">f</span><span class="token punctuation">(</span><span class="token number">4.5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// Base: 4.5</span>
+    b<span class="token punctuation">.</span><span class="token function">func</span><span class="token punctuation">(</span><span class="token number">4.5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// Base: 4.5</span>
     Derived d<span class="token punctuation">;</span>
-    d<span class="token punctuation">.</span><span class="token function">f</span><span class="token punctuation">(</span><span class="token number">4.5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// Base: 4.5</span>
-    <span class="token comment">// 如果 Derived 中没有 using Base::f; 则 d.f(4.5); 输出：Derived: 4</span>
+    d<span class="token punctuation">.</span><span class="token function">func</span><span class="token punctuation">(</span><span class="token number">4.5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// Base: 4.5</span>
+    <span class="token comment">// 如果 Derived 中没有 using Base::func; 则 d.func(4.5); 输出：Derived: 4</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>在 C++11 中，这个想法被扩展到了构造函数上，子类可以通过使用 using 声明来声明继承基类的构造函数。</p>
+<p>在 C++11 中，这个想法被扩展到了构造函数上，子类可以通过使用 using 来声明继承基类的构造函数。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Base</span>
 <span class="token punctuation">{</span>
 <span class="token keyword">public</span><span class="token operator">:</span>
@@ -605,16 +608,19 @@
 <span class="token keyword">public</span><span class="token operator">:</span>
     <span class="token keyword">using</span> Base<span class="token double-colon punctuation">::</span>Base<span class="token punctuation">;</span>
     <span class="token comment">// ...</span>
-    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">ExtraInterface</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>C++11 标准中继承构造函数被设计为跟派生类中的各种类默认函数（默认构造、析构、拷贝构造等）一样，是隐式声明的。这意味着如果一个继承构造函数不被相关代码使用，编译器不会为其产生真正的函数代码。</p>
 <p><strong>不过继承构造函数只会初始化基类中成员变量，对于派生类中的成员变量，则无能为力</strong>。</p>
 <p>基类构造函数的参数会有默认值，对于继承构造函数来讲，参数的默认值时不会被继承的。事实上，默认值会导致基类产生多个构造函数的版本，这些函数版本都会被派生类继承。</p>
-<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Base</span> 
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+
+<span class="token keyword">class</span> <span class="token class-name">Base</span> 
 <span class="token punctuation">{</span>
 <span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token function">Base</span><span class="token punctuation">(</span><span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token keyword">double</span> d <span class="token operator">=</span> <span class="token number">2.4</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">a_</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">d_</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token function">Base</span><span class="token punctuation">(</span><span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token keyword">double</span> d <span class="token operator">=</span> <span class="token number">2.4</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">a_</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">d_</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"a_ = "</span> <span class="token operator">&lt;&lt;</span> a_ <span class="token operator">&lt;&lt;</span> <span class="token string">", d_ = "</span> <span class="token operator">&lt;&lt;</span> d_ <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
 <span class="token keyword">private</span><span class="token operator">:</span>
     <span class="token keyword">int</span> a_<span class="token punctuation">;</span>
@@ -629,9 +635,11 @@
 
 <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
-    Derived s1<span class="token punctuation">;</span>
-    Derived <span class="token function">s2</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    Derived s1<span class="token punctuation">;</span>  <span class="token comment">// a_ = 3, d_ = 2.4</span>
+    Derived <span class="token function">s2</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// a_ = 10, d_ = 2.4</span>
+    Derived <span class="token function">s3</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">6.6</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// a_ = 10, d_ = 6.6</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>事实上，Derived 可能从 Base 中继承来的候选继承构造函数有如下：</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token function">Base</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token keyword">double</span> <span class="token operator">=</span> <span class="token number">2.4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 使用两个默认参数</span>

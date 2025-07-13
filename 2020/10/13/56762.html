@@ -369,7 +369,7 @@ struct TestA
 <span class="token comment">// 直接初始化</span>
 <span class="token keyword">int</span> <span class="token function">j</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>这些不同的初始化方法都有各自的适用范围，但是种类繁多的方法却没有一种可以通用的。所以 C++11 提出了初始化列表的方法来解决此问题。</p>
+<p>这些不同的初始化方法都有各自的适用范围，但是种类繁多的方法却没有一种可以通用的，所以 C++11 提出了初始化列表的方法来解决此问题。</p>
 <h2 id="二、快速初始化成员变量"><a href="#二、快速初始化成员变量" class="headerlink" title="二、快速初始化成员变量"></a>二、快速初始化成员变量</h2><p>在 C++98/03 中，支持在类声明中使用等号”=”加初始值的方式，来初始化类中静态成员常量。如果静态成员不满足常量性，则不可以就地初始化，而且即使静态成员常量也只能是整型或者枚举才能就地初始化，而非静态成员变量的初始化则必须在构造函数中进行。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Test</span>
 <span class="token punctuation">{</span>
@@ -388,6 +388,7 @@ struct TestA
 
 <p>C++11 中可以使用 {} 就地初始化非静态成员，但是列表初始化的效果总是优于就地初始化的。对于非常量的静态成员变量，还是需要到头文件以外去定义。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+
 <span class="token keyword">class</span> <span class="token class-name">TestA</span>
 <span class="token punctuation">{</span>
 <span class="token keyword">public</span><span class="token operator">:</span>
@@ -414,11 +415,11 @@ struct TestA
     <span class="token punctuation">{</span>
         std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"TestB(int), val: "</span> <span class="token operator">&lt;&lt;</span> val_ <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-    <span class="token keyword">void</span> <span class="token function">NumOfA</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">void</span> <span class="token function">num_of_a</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
     <span class="token punctuation">{</span>
         std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"number of A: "</span> <span class="token operator">&lt;&lt;</span> a<span class="token punctuation">.</span>num_ <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-    <span class="token keyword">void</span> <span class="token function">NumOfB</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">void</span> <span class="token function">num_of_b</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
     <span class="token punctuation">{</span>
         std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"number of B: "</span> <span class="token operator">&lt;&lt;</span> b<span class="token punctuation">.</span>num_ <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
@@ -435,15 +436,16 @@ struct TestA
     TestB b<span class="token punctuation">;</span>  <span class="token comment">// TestA(), num: 2</span>
     <span class="token comment">// TestA(int), num: 19</span>
     <span class="token comment">// TestB(), val: g</span>
-    b<span class="token punctuation">.</span><span class="token function">NumOfA</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// number of A: 2</span>
-    b<span class="token punctuation">.</span><span class="token function">NumOfB</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// number of B: 19</span>
+    b<span class="token punctuation">.</span><span class="token function">num_of_a</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// number of A: 2</span>
+    b<span class="token punctuation">.</span><span class="token function">num_of_b</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// number of B: 19</span>
 
     TestB <span class="token function">c</span><span class="token punctuation">(</span><span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// TestA(int), num: 7</span>
     <span class="token comment">// TestA(int), num: 19</span>
     <span class="token comment">// TestB(int), val: G</span>
-    c<span class="token punctuation">.</span><span class="token function">NumOfA</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// number of A: 7</span>
-    c<span class="token punctuation">.</span><span class="token function">NumOfB</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// number of B: 19</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    c<span class="token punctuation">.</span><span class="token function">num_of_a</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// number of A: 7</span>
+    c<span class="token punctuation">.</span><span class="token function">num_of_b</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// number of B: 19</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="三、统一初始化方法——列表初始化"><a href="#三、统一初始化方法——列表初始化" class="headerlink" title="三、统一初始化方法——列表初始化"></a>三、统一初始化方法——列表初始化</h2><p>C++98/03 中已经存在初始化列表的方法，只是范围比较窄，只适用于常规 POD 类型。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> arr1<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
@@ -465,39 +467,34 @@ struct TestA
 <span class="token punctuation">{</span>
 <span class="token keyword">public</span><span class="token operator">:</span>
     <span class="token function">Test</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token keyword">private</span><span class="token operator">:</span>
-    <span class="token function">Test</span><span class="token punctuation">(</span><span class="token keyword">const</span> Test<span class="token operator">&amp;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
 <span class="token keyword">void</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     Test <span class="token function">v1</span><span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    Test v2 <span class="token operator">=</span> v1<span class="token punctuation">;</span> <span class="token comment">// error: Test::Test(const Test &amp;) is private.</span>
-    Test v3 <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">123</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
-    Test v4<span class="token punctuation">{</span> <span class="token number">123</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
-    <span class="token keyword">int</span> v5 <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">2</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
-    <span class="token keyword">int</span> v6<span class="token punctuation">{</span> <span class="token number">3</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    Test v2 <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">123</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    Test v3<span class="token punctuation">{</span> <span class="token number">123</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> v4 <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">2</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> v5<span class="token punctuation">{</span> <span class="token number">3</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>新的初始化方法是变量名后面加 {} 来进行初始化，{} 内则是初始化的内容，等号是否存在并不影响(编译器会进行优化)。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">type val<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>C++11 的新方式同样支持 new 操作符：</p>
-<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span><span class="token operator">*</span> a <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">{</span> <span class="token number">5</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token keyword">double</span> b <span class="token operator">=</span> <span class="token keyword">double</span><span class="token punctuation">{</span> <span class="token number">12.34</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span><span class="token operator">*</span> arr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>初始化列表支持 new 操作符，也可以作为函数的返回值：</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int* a = new int{ 5 };
+int* arr = new int[3] {1, 2, 3};、
 
-<p>初始化列表还有一个特殊的地方，就是作为函数的返回值。</p>
-<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">return</span> <span class="token punctuation">{</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+std::vector&lt;int&gt; func()
+{
+    return { 1, 2, 3 };
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>在 C++11 中，初始化列表是非常方便的，不仅统一了对象的初始化方式，还使代码更加简洁清晰。</p>
 <h3 id="1-std-initializer-list"><a href="#1-std-initializer-list" class="headerlink" title="1. std::initializer_list"></a>1. std::initializer_list</h3><p>在 C++11 中，对于 stl 容器和未显示数组长度的数组可以进行任意长度的初始化。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> arr<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
 std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> vec <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
-std<span class="token double-colon punctuation">::</span>map<span class="token operator">&lt;</span>std<span class="token double-colon punctuation">::</span>string<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">&gt;</span> map_t <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token punctuation">{</span><span class="token string">"1"</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token string">"2"</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token string">"3"</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+std<span class="token double-colon punctuation">::</span>map<span class="token operator">&lt;</span>std<span class="token double-colon punctuation">::</span>string<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">&gt;</span> tmap <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token punctuation">{</span><span class="token string">"1"</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token string">"2"</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token string">"3"</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>但是对于自定义类型不具备这种能力，但是 C++11 解决了这个问题，C++11 中可以通过轻量级模板 <code>std::initalizer_list</code> 来解决这个问题。只需要添加一个参数为 <code>std::initializer_list</code> 的构造函数，这个自定义类型即可拥有这种任意长度初始化列表来初始化的能力。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Test</span>
@@ -540,11 +537,12 @@ Test t <span class="token operator">=</span> <span class="token punctuation">{</
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
-<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="2-使用细节"><a href="#2-使用细节" class="headerlink" title="2. 使用细节"></a>2. 使用细节</h3><p><code>std::initializer_list</code> 的实现：</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">template</span> <span class="token operator">&lt;</span><span class="token keyword">class</span> <span class="token class-name">_Elem</span><span class="token operator">&gt;</span>
@@ -583,7 +581,7 @@ Test t <span class="token operator">=</span> <span class="token punctuation">{</
 
 <p><code>std::initializer_list</code> 的特点如下：</p>
 <ul>
-<li><p>其编译底层使用的是 <code>std::array</code>，<code>std::initializer_list</code> 保存的是 array 的引用；</p>
+<li><p>编译底层使用的是 <code>std::array</code>，<code>std::initializer_list</code> 保存的是 array 的引用；</p>
 </li>
 <li><p>它是一个轻量级的容器类型；</p>
 </li>
@@ -604,20 +602,33 @@ len <span class="token operator">=</span> ini_list<span class="token punctuation
 
 <p><code>std::initializer_list</code> 是非常高效的，它的内部并不保存初始化列表元素中的拷贝，仅仅<strong>保存初始化列表中的引用</strong>。</p>
 <p>如果按照下面的代码来使用 <code>std::initializer_list</code> 是错误的，虽然可以正常通过编译，但是可能无法得到我们希望的结果，因为 a，b 在函数结束时生存周期也结束了，返回的是不确定的内容。</p>
-<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">std<span class="token double-colon punctuation">::</span>initializer_list<span class="token operator">&lt;</span>std<span class="token double-colon punctuation">::</span>string<span class="token operator">&gt;</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">std<span class="token double-colon punctuation">::</span>initializer_list<span class="token operator">&lt;</span>std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span>std<span class="token double-colon punctuation">::</span>string<span class="token operator">&gt;&gt;</span> <span class="token function">func2</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
-    std<span class="token double-colon punctuation">::</span>string a<span class="token punctuation">{</span> <span class="token string">"hello"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> b<span class="token punctuation">{</span> <span class="token string">"world"</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> <span class="token punctuation">{</span> a<span class="token punctuation">,</span> b <span class="token punctuation">}</span><span class="token punctuation">;</span>  <span class="token comment">// a,b 在返回时并没有拷贝</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span>std<span class="token double-colon punctuation">::</span>string<span class="token operator">&gt;</span> vec1<span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">100</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        vec1<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span><span class="token function">to_string</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span>std<span class="token double-colon punctuation">::</span>string<span class="token operator">&gt;</span> vec2<span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">200</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        vec2<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span><span class="token function">to_string</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span> vec1<span class="token punctuation">,</span> vec2 <span class="token punctuation">}</span><span class="token punctuation">;</span>  <span class="token comment">// vec1, vec2 在返回时并没有拷贝</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>正确的用法是，通过真正的容器或者具有转移拷贝语意的物件来替代 <code>std::initializer_list</code>。</p>
-<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span>std<span class="token double-colon punctuation">::</span>string<span class="token operator">&gt;</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<p>正确的用法是，通过真正的容器或者具有转移拷贝语意的容器来替代 <code>std::initializer_list</code>。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span>std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span>std<span class="token double-colon punctuation">::</span>string<span class="token operator">&gt;&gt;</span> <span class="token function">func2</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
-    std<span class="token double-colon punctuation">::</span>string a<span class="token punctuation">{</span> <span class="token string">"hello"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> b<span class="token punctuation">{</span> <span class="token string">"world"</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> <span class="token punctuation">{</span> a<span class="token punctuation">,</span> b <span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span>std<span class="token double-colon punctuation">::</span>string<span class="token operator">&gt;</span> vec1<span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">100</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        vec1<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span><span class="token function">to_string</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span>std<span class="token double-colon punctuation">::</span>string<span class="token operator">&gt;</span> vec2<span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">200</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        vec2<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span><span class="token function">to_string</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span> vec1<span class="token punctuation">,</span> vec2 <span class="token punctuation">}</span><span class="token punctuation">;</span>  <span class="token comment">// vec1, vec2 在返回时并没有拷贝</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>应该将 <code>std::initializer_list</code> 看作保存对象的引用来使用，在它持有的对象的生命周期结束之前来完成传递。</p>
 <h2 id="四、防止类型收窄"><a href="#四、防止类型收窄" class="headerlink" title="四、防止类型收窄"></a>四、防止类型收窄</h2><h3 id="1-类型收窄的情况"><a href="#1-类型收窄的情况" class="headerlink" title="1. 类型收窄的情况"></a>1. 类型收窄的情况</h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Test</span>
 <span class="token punctuation">{</span>
 <span class="token keyword">public</span><span class="token operator">:</span>
