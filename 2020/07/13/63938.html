@@ -318,7 +318,7 @@ typedef struct _TEST_A
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    932
+                    927
                 </div>
                 
 
@@ -372,7 +372,7 @@ typedef struct _TEST_A
 sizeof(struct _TEST_B) = 8<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>对于 TestA 的结果是 16，通常没有什么疑问，因为 4(int)+4(int)+8(指针)=16，但是对于 TestB 结构体占用 8 字节，可能会有疑问。</p>
-<h2 id="一、柔性数组（flexible-array）"><a href="#一、柔性数组（flexible-array）" class="headerlink" title="一、柔性数组（flexible array）"></a>一、柔性数组（flexible array）</h2><p>实际上这是 C99 中引入的柔性数组的特性。即结构体的最后一个成员，可以是<strong>不完整类型</strong>（一种缺乏足够的信息去描述一个完整对象的类型）的数组，但它使得整个结构体的大小就像没有这个成员一样。但是，当通过这个名字访问这个成员时，就像访问一个普通数组成员一样。</p>
+<h2 id="一、柔性数组（flexible-array）"><a href="#一、柔性数组（flexible-array）" class="headerlink" title="一、柔性数组（flexible array）"></a>一、柔性数组（flexible array）</h2><p>C99 中引入的柔性数组的特性。即结构体的最后一个成员，可以是<strong>不完整类型</strong>（一种缺乏足够的信息去描述一个完整对象的类型）的数组，但它使得整个结构体的大小就像没有这个成员一样。但是，当通过这个名字访问这个成员时，就像访问一个普通数组成员一样。</p>
 <p>如果数组内一个元素都没有的话，那么访问这个数组将会是未定义行为。</p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token class-name">_TEST_B</span>
 <span class="token punctuation">{</span>

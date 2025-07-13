@@ -321,7 +321,7 @@ void* operator new(size_t);    ">
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    7 分
+                    8 分
                 </div>
                 
 
@@ -365,11 +365,11 @@ void* operator new(size_t);    ">
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>调用 malloc 失败后会调用 _callnewh，如果返回 0 则抛出 bad_alloc 异常；返回非零则继续申请内存。</p>
-<p>这个 _callnewh 是一个 new handler，通俗来讲就是 new 失败的时候调用的回调函数。可以通过 _set_new_handler 来设置。</p>
+<p>这个 _callnewh 是一个 new handler，就是 new 失败的时候调用的回调函数。可以通过 _set_new_handler 来设置。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;new.h&gt;</span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
 
-<span class="token keyword">int</span> <span class="token function">myNewHandler</span><span class="token punctuation">(</span>size_t size<span class="token punctuation">)</span>
+<span class="token keyword">int</span> <span class="token function">my_new_handler</span><span class="token punctuation">(</span>size_t size<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Allocation failed. Try again\n"</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>  <span class="token comment">// continue to allocate</span>
@@ -378,8 +378,8 @@ void* operator new(size_t);    ">
 
 <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
-    <span class="token comment">// Set the failure handler for new to be myNewHandler.</span>
-    <span class="token function">_set_new_handler</span><span class="token punctuation">(</span>myNewHandler<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// Set the failure handler for new to be my_new_handler.</span>
+    <span class="token function">_set_new_handler</span><span class="token punctuation">(</span>my_new_handler<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">int</span><span class="token operator">*</span> p <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token number">10000000</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
@@ -398,8 +398,7 @@ void* operator new(size_t);    ">
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Object</span>
 <span class="token punctuation">{</span>
 <span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token function">Object</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
-        <span class="token operator">:</span> <span class="token function">val_</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token function">Object</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">val_</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
     <span class="token punctuation">{</span><span class="token punctuation">}</span>
 
     <span class="token operator">~</span><span class="token function">Object</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -412,6 +411,7 @@ void* operator new(size_t);    ">
 <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     Object<span class="token operator">*</span> p <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">Object</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>汇编码如下：</p>
@@ -433,11 +433,12 @@ void* operator new(size_t);    ">
 <p>RTCCALLBACK 默认是空的宏定义，所以这个函数默认情况下就是简单的调用 free 函数。</p>
 <h4 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a>总结</h4><p>简单数据类型默认只是调用 free 函数。</p>
 <h3 id="2-复杂数据类型-1"><a href="#2-复杂数据类型-1" class="headerlink" title="2. 复杂数据类型"></a>2. 复杂数据类型</h3><p>需要由析构函数销毁对象。</p>
-<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Object</span>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+
+<span class="token keyword">class</span> <span class="token class-name">Object</span>
 <span class="token punctuation">{</span>
 <span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token function">Object</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
-        <span class="token operator">:</span> <span class="token function">val_</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token function">Object</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">val_</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
     <span class="token punctuation">{</span><span class="token punctuation">}</span>
 
     <span class="token operator">~</span><span class="token function">Object</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
@@ -454,7 +455,7 @@ void* operator new(size_t);    ">
     Object<span class="token operator">*</span> p <span class="token operator">=</span> <span class="token keyword">new</span> Object<span class="token punctuation">;</span>
     <span class="token keyword">delete</span> p<span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>部分汇编码如下：</p>
 <p><img src="/pic/57563_004.png" alt="delete"></p>
@@ -473,8 +474,7 @@ void* operator new(size_t);    ">
 <span class="token keyword">class</span> <span class="token class-name">Object</span>
 <span class="token punctuation">{</span>
 <span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token function">Object</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
-        <span class="token operator">:</span> <span class="token function">val_</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token function">Object</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">val_</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
     <span class="token punctuation">{</span><span class="token punctuation">}</span>
 
     <span class="token operator">~</span><span class="token function">Object</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
@@ -490,20 +490,21 @@ void* operator new(size_t);    ">
 <span class="token punctuation">{</span>
     Object<span class="token operator">*</span> p <span class="token operator">=</span> <span class="token keyword">new</span> Object<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>new[] 先调用 operator new[] 分配内存，然后在 p 的前四个字节写入数组大小，最后调用三次构造函数。</p>
 <p>实际分配的内存块如下：</p>
 <p><img src="/pic/57563_005.png" alt="new"></p>
 <p>数组长度是对象析构时会使用的值。</p>
-<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Object</span>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+
+<span class="token keyword">class</span> <span class="token class-name">Object</span>
 <span class="token punctuation">{</span>
 <span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token function">Object</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
-        <span class="token operator">:</span> <span class="token function">val_</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token function">Object</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">val_</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
     <span class="token punctuation">{</span><span class="token punctuation">}</span>
 
-    <span class="token operator">~</span><span class="token function">Object</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+    <span class="token keyword">virtual</span> <span class="token operator">~</span><span class="token function">Object</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
     <span class="token punctuation">{</span> 
         std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"destroy object"</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
@@ -529,7 +530,7 @@ void* operator new(size_t);    ">
     Object <span class="token operator">*</span>p <span class="token operator">=</span> <span class="token keyword">new</span> MyObject<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
     <span class="token keyword">delete</span><span class="token punctuation">[</span><span class="token punctuation">]</span> p<span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>释放内存之前会调用每个对象的析构函数，但是编译器并不知道 p 实际所指对象的大小。如果没有储存数组大小，编译器如何知道该把 p 所指的内存分为几次来调用析构函数呢？</p>
 <h4 id="总结-5"><a href="#总结-5" class="headerlink" title="总结"></a>总结</h4><p>针对复杂类型，new[] 会额外存储数组大小。</p>
@@ -585,6 +586,7 @@ void* operator new(size_t);    ">
 <p>普通的 new 运算符做两件事：（1）分配内存、（2）在分配的内存中构造一个对象。</p>
 <p>而 placement new 允许将以上两件事分开。在 placement new 中，可以传递一个预分配的内存并在传递的内存中构造一个对象。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+
 <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
@@ -598,12 +600,14 @@ void* operator new(size_t);    ">
     std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"res = "</span> <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span>res <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
     std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"res addr: "</span> <span class="token operator">&lt;&lt;</span> res <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>结果：</p>
 <p><img src="/pic/57563_006.png" alt="new"></p>
 <h3 id="1-placement-new-使用时机"><a href="#1-placement-new-使用时机" class="headerlink" title="1. placement new 使用时机"></a>1. placement new 使用时机</h3><p>因为它允许在已经分配的内存上构造一个对象，所以可能存在<strong>需要多次重新构造对象</strong>的情况，因此在这些情况下 placement new 运算符可能更有效。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstring&gt;</span></span>
+
 <span class="token keyword">class</span> <span class="token class-name">String</span>
 <span class="token punctuation">{</span>
 <span class="token keyword">public</span><span class="token operator">:</span>
@@ -641,7 +645,7 @@ void* operator new(size_t);    ">
     <span class="token comment">// 当不需要使用 mem 内存时，释放内存</span>
     <span class="token double-colon punctuation">::</span><span class="token keyword">operator</span> <span class="token keyword">delete</span><span class="token punctuation">(</span>mem<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="2-删除-placement-new-分配的内存"><a href="#2-删除-placement-new-分配的内存" class="headerlink" title="2. 删除 placement new 分配的内存"></a>2. 删除 placement new 分配的内存</h3><p>对于类对象，需要显示调用类的析构函数。<strong>不可以使用 delete 操作符</strong>。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// 在现有内存块上构造一个 String 对象</span>
@@ -650,6 +654,7 @@ String<span class="token operator">*</span> s <span class="token operator">=</sp
 <span class="token comment">// ...</span>
 <span class="token comment">// 当不使用 String 时，在不释放内存的情况下销毁 String 对象</span>
 s<span class="token operator">-&gt;</span><span class="token operator">~</span><span class="token function">String</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 释放</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
                 
             </div>
             <hr/>

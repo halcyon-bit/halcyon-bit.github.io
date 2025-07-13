@@ -379,7 +379,7 @@ pStr p1<span class="token punctuation">;</span><span aria-hidden="true" class="l
     <span class="token keyword">long</span> length<span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token class-name">tagMyStruct</span> MyStruct<span class="token punctuation">;</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token class-name">tagMyStruct</span> MyStruct<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>分析：tagMyStruct 称为“tag”，即“标签”，实际上是一个临时名字，struct 关键字和 tagMyStruct 一起，构成了这个结构类型，不论是否有 typedef，这个结构都存在。</p>
 <p>所以，若没有 typedef，则使用 <code>struct tagMyStruct varName</code> 来定义变量，但要注意，使用 <code>tagMyStruct varName</code> 来定义变量是不对的，因为 struct 和 tagMyStruct 合在一起才能表示一个结构类型。</p>
@@ -435,7 +435,7 @@ __FUNCTION__  <span class="token comment">// 函数名</span>
 <span class="token comment">// linux:</span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">__FILENAME__</span> <span class="token expression"><span class="token punctuation">(</span><span class="token function">strrchr</span><span class="token punctuation">(</span></span><span class="token string">"/"</span> <span class="token expression"><span class="token constant">__FILE__</span><span class="token punctuation">,</span> </span><span class="token char">'/'</span><span class="token expression"><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span></span></span>
 
-<span class="token comment">// 编译期 未测试</span>
+<span class="token comment">// 编译期(未测试)</span>
 <span class="token comment">// 使用 cmake</span>
 <span class="token comment">// set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D__FILENAME__='"$(notdir $&lt;)"'")</span>
 <span class="token comment">// 使用 makefile</span>

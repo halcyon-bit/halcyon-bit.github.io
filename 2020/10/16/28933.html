@@ -5,9 +5,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="并行(C++11), halcyon">
-    <meta name="description" content="C++11 新标准中引入了五个头文件来支持多线程编程，分别是：&amp;lt;atomic&amp;gt;，&amp;lt;thread&amp;gt;，&amp;lt;mutex&amp;gt;，&amp;lt;condition_variable&amp;gt;。
+    <meta name="description" content="C++11 引入了五个头文件来支持多线程编程，分别是：&amp;lt;atomic&amp;gt;，&amp;lt;thread&amp;gt;，&amp;lt;mutex&amp;gt;，&amp;lt;condition_variable&amp;gt;。
 
-&amp;lt;atomic&amp;gt;：声">
+&amp;lt;atomic&amp;gt;：声明了 s">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -321,7 +321,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    20 分
+                    21 分
                 </div>
                 
 
@@ -339,7 +339,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>C++11 新标准中引入了五个头文件来支持多线程编程，分别是：<code>&lt;atomic&gt;</code>，<code>&lt;thread&gt;</code>，<code>&lt;mutex&gt;</code>，<code>&lt;condition_variable&gt;</code>。</p>
+                <p>C++11 引入了五个头文件来支持多线程编程，分别是：<code>&lt;atomic&gt;</code>，<code>&lt;thread&gt;</code>，<code>&lt;mutex&gt;</code>，<code>&lt;condition_variable&gt;</code>。</p>
 <ul>
 <li><code>&lt;atomic&gt;</code>：声明了 <code>std::atomic</code> 和 <code>std::atomic_flag</code> ；</li>
 <li><code>&lt;thread&gt;</code>：声明了 <code>std::thread</code> ，以及<code>std::this_thread</code> 命名空间；</li>
@@ -352,30 +352,30 @@
 
 <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
 <span class="token punctuation">{</span>
-	<span class="token keyword">auto</span> func1 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-		<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-			std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> i <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span><span class="token punctuation">;</span>
-		<span class="token punctuation">}</span>
-		std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
-	<span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">auto</span> func1 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> i <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
     
-	std<span class="token double-colon punctuation">::</span>thread <span class="token function">t1</span><span class="token punctuation">(</span>func1<span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token keyword">if</span> <span class="token punctuation">(</span>t1<span class="token punctuation">.</span><span class="token function">joinable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>  <span class="token comment">// 检查线程可否被join</span>
-		t1<span class="token punctuation">.</span><span class="token function">detach</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token punctuation">}</span>
+    std<span class="token double-colon punctuation">::</span>thread <span class="token function">t1</span><span class="token punctuation">(</span>func1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>t1<span class="token punctuation">.</span><span class="token function">joinable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>  <span class="token comment">// 检查线程可否被join</span>
+        t1<span class="token punctuation">.</span><span class="token function">detach</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-	<span class="token keyword">auto</span> func2 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token keyword">int</span> k<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-		<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> k<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-			std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> i <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span><span class="token punctuation">;</span>
-		<span class="token punctuation">}</span>
-		std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
-	<span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">auto</span> func2 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token keyword">int</span> k<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> k<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> i <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-	std<span class="token double-colon punctuation">::</span>thread <span class="token function">t2</span><span class="token punctuation">(</span>func2<span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token keyword">if</span> <span class="token punctuation">(</span>t2<span class="token punctuation">.</span><span class="token function">joinable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-		t2<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token punctuation">}</span>
-	<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>thread <span class="token function">t2</span><span class="token punctuation">(</span>func2<span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>t2<span class="token punctuation">.</span><span class="token function">joinable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        t2<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>注意</strong>：可被 joinable 的 thread 对象必须在它们销毁之前被主线程 join 或者将其设置为 detached。</p>
@@ -440,7 +440,7 @@ std<span class="token double-colon punctuation">::</span>thread<span class="toke
 
 <h4 id="3-5-yield-函数"><a href="#3-5-yield-函数" class="headerlink" title="3.5 yield 函数"></a>3.5 yield 函数</h4><p><code>std::this_thread::yield()</code> 函数的作用是当前线程“放弃”执行，让操作系统调度另一线程继续执行。</p>
 <p>将悬挂当前线程并将它放到准备运行的同优先级线程的队列尾（而若无其他线程在同优先级，则 <code>yield</code> 无效果），此函数的准确性为依赖于实现。</p>
-<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;mutex&gt;</span></span>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;atomic&gt;</span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;thread&gt;</span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;string&gt;</span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;chrono&gt;</span></span>
@@ -457,10 +457,10 @@ std<span class="token double-colon punctuation">::</span>atomic<span class="toke
 
     <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">1000000</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 
-    std<span class="token double-colon punctuation">::</span>string <span class="token function">ss</span><span class="token punctuation">(</span><span class="token string">"thread : "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    ss<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span><span class="token function">to_string</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    ss<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> ss<span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>string <span class="token function">str</span><span class="token punctuation">(</span><span class="token string">"thread : "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    str<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span><span class="token function">to_string</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    str<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> str<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -515,7 +515,7 @@ std<span class="token double-colon punctuation">::</span>atomic<span class="toke
 <span class="token keyword">volatile</span> <span class="token keyword">int</span> counter<span class="token punctuation">{</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
 std<span class="token double-colon punctuation">::</span>mutex mtx<span class="token punctuation">;</span>
 
-<span class="token keyword">void</span> <span class="token function">threadProc</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">void</span> <span class="token function">thread_proc</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">10000</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span>mtx<span class="token punctuation">.</span><span class="token function">try_lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -529,15 +529,17 @@ std<span class="token double-colon punctuation">::</span>mutex mtx<span class="t
 <span class="token punctuation">{</span>
     <span class="token keyword">constexpr</span> size_t num<span class="token punctuation">{</span> <span class="token number">5</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
     std<span class="token double-colon punctuation">::</span>thread threads<span class="token punctuation">[</span>num<span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> num<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
-        threads<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> std<span class="token double-colon punctuation">::</span><span class="token function">thread</span><span class="token punctuation">(</span>threadProc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> num<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        threads<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> std<span class="token double-colon punctuation">::</span><span class="token function">thread</span><span class="token punctuation">(</span>thread_proc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> th <span class="token operator">:</span> threads<span class="token punctuation">)</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> th <span class="token operator">:</span> threads<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         th<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
     std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> counter <span class="token operator">&lt;&lt;</span> <span class="token string">" successful increases of the counter.\n"</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="2-递归互斥量"><a href="#2-递归互斥量" class="headerlink" title="2. 递归互斥量"></a>2. 递归互斥量</h3><p><code>std::recursive_mutex</code> 与 <code>std::mutex</code> 一样，也是一种可以被上锁的对象，但是和 mutex 不同的是，recursive_mutex 允许同一个线程对互斥量多次上锁（即递归上锁），来获得对互斥量对象的多层所有权。recursive_mutex 释放互斥量时需要调用与该锁层次深度相同次数的 unlock，可理解为 lock 次数和 unlock 次数相同，除此之外，recursive_mutex 和 mutex 大致相同。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;mutex&gt;</span></span>
@@ -585,7 +587,7 @@ std<span class="token double-colon punctuation">::</span>recursive_mutex mutex<s
 
 std<span class="token double-colon punctuation">::</span>timed_mutex mutex<span class="token punctuation">;</span>
 
-<span class="token keyword">void</span> <span class="token function">threadProc</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">void</span> <span class="token function">thread_proc</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>mutex<span class="token punctuation">.</span><span class="token function">try_lock_for</span><span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span>chrono<span class="token double-colon punctuation">::</span><span class="token function">milliseconds</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"-"</span><span class="token punctuation">;</span>
@@ -600,13 +602,15 @@ std<span class="token double-colon punctuation">::</span>timed_mutex mutex<span 
 <span class="token punctuation">{</span>
     <span class="token keyword">constexpr</span> size_t num<span class="token punctuation">{</span> <span class="token number">5</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
     std<span class="token double-colon punctuation">::</span>thread threads<span class="token punctuation">[</span>num<span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> num<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
-        threads<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> std<span class="token double-colon punctuation">::</span><span class="token function">thread</span><span class="token punctuation">(</span>threadProc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> num<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        threads<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> std<span class="token double-colon punctuation">::</span><span class="token function">thread</span><span class="token punctuation">(</span>thread_proc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> th <span class="token operator">:</span> threads<span class="token punctuation">)</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> th <span class="token operator">:</span> threads<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         th<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="4-lock-锁"><a href="#4-lock-锁" class="headerlink" title="4. lock 锁"></a>4. lock 锁</h3><p>C++11 标准提供了两种基本的锁类型，分别如下：</p>
 <ul>
@@ -635,15 +639,37 @@ std<span class="token double-colon punctuation">::</span>mutex mutex<span class=
 
     <span class="token keyword">constexpr</span> size_t num<span class="token punctuation">{</span> <span class="token number">5</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
     std<span class="token double-colon punctuation">::</span>thread threads<span class="token punctuation">[</span>num<span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> num<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> num<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         threads<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> std<span class="token double-colon punctuation">::</span><span class="token function">thread</span><span class="token punctuation">(</span>func<span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> th <span class="token operator">:</span> threads<span class="token punctuation">)</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> th <span class="token operator">:</span> threads<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         th<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><code>std::adopt_lock_t</code>、<code>std::defer_lock_t</code>、<code>std::try_to_lock_t</code> 通常作为参数传入给 <code>std::unique_lock</code> 或 <code>std::lock_guard</code> 的构造函数。</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>std::defer_lock_t</td>
+<td>do not acquire ownership of the mutex</td>
+</tr>
+<tr>
+<td>std::try_to_lock_t</td>
+<td>try to acquire ownership of the mutex without blocking</td>
+</tr>
+<tr>
+<td>std::adopt_lock_t</td>
+<td>assume the calling thread already has ownership of the mutex</td>
+</tr>
+</tbody></table>
 <h2 id="三、condition-variable"><a href="#三、condition-variable" class="headerlink" title="三、condition_variable"></a>三、condition_variable</h2><p><code>std::condition_variable</code>（条件变量）是 C++11 引入的一种同步机制，它可以阻塞一个线程或者多个线程，直到收到另外一个线程发出的通知或者超时，才会唤醒当前阻塞的线程，条件变量要和互斥量配合起来使用。</p>
 <ul>
 <li><code>std::condition_variable</code>：配合 <code>std::unique_lock&lt;std::mutex&gt;</code> 进行 wait 操作。</li>

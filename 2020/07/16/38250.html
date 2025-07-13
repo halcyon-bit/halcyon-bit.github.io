@@ -374,7 +374,7 @@ i++;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span
 <ol>
 <li>先读取 i 的值到 tmp；</li>
 <li>增加 tmp 的值；</li>
-<li>把 tmp 的值写回到 i 的地址里；</li>
+<li>把 tmp 的值写回到 i 的地址里。</li>
 </ol>
 <p>而 volatile 只能保证内存可见，可以理解为上述三步中的每一步都是原子的，但是三步合起来却不一定是原子的，因为在多线程中三步中间可能插入一些其它操作改变了预期的行为，所以 volatile 不能用在多线程中，多线程中的原子操作还是需要使用 atomic。</p>
 
