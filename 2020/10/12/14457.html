@@ -317,7 +317,7 @@ int *ptr = nullptr;
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    698
+                    706
                 </div>
                 
 
@@ -367,23 +367,27 @@ int *ptr = nullptr;
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
 <span class="token punctuation">{</span>
     <span class="token keyword">int</span> <span class="token operator">*</span>a <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">void</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment">// error: cannot initialize a variable of type 'int *' with an rvalue of type 'void *'</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="一、为什么要引入-nullptr"><a href="#一、为什么要引入-nullptr" class="headerlink" title="一、为什么要引入 nullptr"></a>一、为什么要引入 nullptr</h2><p>一个原因是可以让整数 0 只表示一件事情，它只是一个整数类型 0，没有任何其他语义。</p>
 <p>另一个原因是 C++ 函数重载中，传 <code>NULL</code> 会导致编译失败，所以需要引入 <code>nullptr</code>，使用 <code>nullptr</code> 可以解决函数重载中的参数匹配问题。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token operator">*</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
-    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"char*"</span><span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"char*"</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
+
 <span class="token keyword">void</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
-    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"int"</span><span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"int"</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
+
 <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token function">func</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// error: call of overloaded ‘func(NULL)’ is ambiguous</span>
     <span class="token function">func</span><span class="token punctuation">(</span><span class="token keyword">nullptr</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="二、nullptr-的实现"><a href="#二、nullptr-的实现" class="headerlink" title="二、nullptr 的实现"></a>二、nullptr 的实现</h2><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">struct</span> <span class="token class-name">nullptr_t</span> 
 <span class="token punctuation">{</span>
@@ -407,7 +411,7 @@ int *ptr = nullptr;
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">typedef</span> <span class="token keyword">decltype</span><span class="token punctuation">(</span><span class="token keyword">nullptr</span><span class="token punctuation">)</span> nullptr_t<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>当空指针用 <code>nullptr</code> 表示时，空指针就有类型了，当有异常需要抛出时，就可以抛出 <code>nullptr</code>。</p>
-<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
 <span class="token punctuation">{</span>
 	<span class="token keyword">try</span> <span class="token punctuation">{</span>
         <span class="token comment">// ...</span>
@@ -416,7 +420,8 @@ int *ptr = nullptr;
     <span class="token keyword">catch</span><span class="token punctuation">(</span>nullptr_t<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token comment">// ...</span>
     <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>之后使用它的类型 <code>nullptr_t</code> 捕获，这里如果 throw NULL，那用什么类型去 catch 呢？用 int 类型来 catch？是不是有点别扭。所以能用 <code>nullptr</code> 就一定要用 <code>nullptr</code> 代替 <code>NULL</code>。</p>
 <h2 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h2><ol>

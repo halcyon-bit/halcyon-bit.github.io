@@ -313,14 +313,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3.7k
+                    3.6k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    15 分
+                    14 分
                 </div>
                 
 
@@ -340,10 +340,10 @@
             <div id="articleContent">
                 <h2 id="一、左值、右值"><a href="#一、左值、右值" class="headerlink" title="一、左值、右值"></a>一、左值、右值</h2><p>在 C++11 中所有的值必属于左值、将亡值、纯右值三者之一。</p>
 <p>左值是指表达式结束后依然存在的持久化对象，右值是指表达式结束时就不再存在的临时对象。所有的具名变量或者对象都是左值，而右值不具名。区分左值和右值的方法：<strong>看能不能对表达式取地址</strong>，如果能，则为左值，否则为右值。</p>
-<p>注意：字符串字面量(“hello world”)是左值。</p>
+<p>注意：字符串字面量(如：”hello world”)是左值。</p>
 <p>在 C++11 中，右值分为将亡值和纯右值。</p>
 <p><strong>纯右值</strong>：非引用返回的临时变量、运算表达式产生的临时变量、除字符串字面量之外的字面量和 lambda 表达式等。</p>
-<p><strong>将亡值</strong>：C++11 新增的、与右值引用相关的表达式，比如，将要被移动的对象、T&amp;&amp; 函数返回值、<code>std::move</code> 返回值和转换为 T&amp;&amp; 的类型的转换函数的返回值等，将亡值可以理解为即将要销毁的值。</p>
+<p><strong>将亡值</strong>：C++11 新增的、与右值引用相关的表达式，比如，将要被移动的对象、T&amp;&amp; 函数返回值、<code>std::move</code> 返回值和转换为 T&amp;&amp; 类型的转换函数的返回值等，将亡值可以理解为即将要销毁的值。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Test</span>
 <span class="token punctuation">{</span>
 <span class="token keyword">public</span><span class="token operator">:</span>
@@ -366,24 +366,21 @@ Test <span class="token function">func</span><span class="token punctuation">(</
     <span class="token keyword">auto</span> t2 <span class="token operator">=</span> std<span class="token double-colon punctuation">::</span><span class="token function">move</span><span class="token punctuation">(</span>t1<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// t2 是将亡值</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p><strong>左值引用</strong>：就是对左值进行引用的类型。</p>
-<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> num <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span><span class="token operator">&amp;</span> num1 <span class="token operator">=</span> num<span class="token punctuation">;</span>
-<span class="token keyword">int</span><span class="token operator">&amp;</span> num2 <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>  <span class="token comment">// error</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><strong>左值引用</strong>：对左值进行引用的类型，普通的左值引用不能接受右值。</p>
+<p><strong>右值引用</strong>：对右值进行引用的类型，语法是 T&amp;&amp;，通过’&amp;&amp;’来表示绑定类型为 T 的右值。通过右值引用的声明，该右值又“重获新生”，其生命周期与右值引用类型变量的生命周期一样，只要该变量还活着，该右值将会一直存活下去。</p>
+<p><strong>常量左值引用</strong>：在 C++ 中是个“万能”的引用类型，它可以接收左值、右值、常量左值和常量右值。而且在使用右值对其初始化的时候，常量左值引用还可以像右值引用一样将右值的生命期延长。</p>
+<p>无论是声明一个左值引用还是右值引用，都<strong>必须立即进行初始化</strong>。因为引用类型本身并不拥有所绑定对象的内存，只是该对象的一个别名。左值引用是具名变量的别名，而右值引用则是不具名（匿名）变量的别名。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> num1 <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span><span class="token operator">&amp;</span> num2 <span class="token operator">=</span> num1<span class="token punctuation">;</span>
+<span class="token keyword">int</span><span class="token operator">&amp;</span> num3 <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>  <span class="token comment">// error: 普通的左值引用不能接受右值</span>
 
-<p><strong>右值引用</strong>：就是对右值进行引用的类型。语法是 T&amp;&amp;，通过’&amp;&amp;’来表示绑定类型为 T 的右值。通过右值引用的声明，该右值又“重获新生”，其生命周期与右值引用类型变量的生命周期一样，只要该变量还活着，该右值临时量将会一直存活下去。</p>
-<p>无论是声明一个左值引用还是右值引用，都<strong>必须立即进行初始化</strong>。因为引用类型本身并不拥有所绑定对象的内存，只是该对象的一个别名。左值引用是具名变量值的别名，而右值引用则是不具名（匿名）变量的别名。</p>
-<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span><span class="token operator">&amp;&amp;</span> num1 <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span> num2 <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span><span class="token operator">&amp;&amp;</span> num3 <span class="token operator">=</span> b<span class="token punctuation">;</span>  <span class="token comment">// error: 右值引用是不能绑定任何左值的</span>
+<span class="token keyword">int</span><span class="token operator">&amp;&amp;</span> num4 <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> num5 <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span><span class="token operator">&amp;&amp;</span> num6 <span class="token operator">=</span> num5<span class="token punctuation">;</span>  <span class="token comment">// error: 右值引用是不能绑定任何左值的</span>
 
 Test test1 <span class="token operator">=</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> Test<span class="token operator">&amp;</span> test2 <span class="token operator">=</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-Test test3 <span class="token operator">=</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token keyword">const</span> Test<span class="token operator">&amp;</span> test2 <span class="token operator">=</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>最后一行代码会产生两种类型的值，一种是左值 test3，一种是函数 func() 返回的临时值，这个临时值在表达式结束后就销毁了，而左值 test3 在表达式结束后仍然存在，这个临时值就是右值。</p>
-<p><strong>常量左值引用</strong>：在 C++ 中是个“万能”的引用类型，它可以接收左值、右值、常量左值和常量右值。而且在使用右值对其初始化的时候，常量左值引用还可以像右值引用一样将右值的生命期延长。</p>
-<p><strong>注意</strong>：普通的左值引用不能接受右值。</p>
 <h2 id="二、右值引用"><a href="#二、右值引用" class="headerlink" title="二、右值引用"></a>二、右值引用</h2><p>T&amp;&amp; 并不一定表示右值，有可能表示左值，也有可能表示右值，称为 universal references（未定的引用类型）。但是 T&amp;&amp; 必须被初始化，如果被右值初始化就是右值；如果被左值初始化就是左值。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;type_traits&gt;</span></span>
@@ -520,7 +517,7 @@ Test test3 <span class="token operator">=</span> <span class="token function">fu
 <li>所有的右值引用叠加到右值引用上仍然是一个右值引用，其他引用折叠都为左值引用。当 T&amp;&amp; 为模板参数时，输入左值，它会变成左值引用，而输入右值时则变为具名的右值引用；</li>
 <li>编译器会将已命名的右值引用视为左值，而将未命名的右值引用视为右值。</li>
 </ul>
-<h2 id="三、优化性能"><a href="#三、优化性能" class="headerlink" title="三、优化性能"></a>三、优化性能</h2><p>引入右值解决两个问题，第一个问题就是<strong>临时对象非必要的昂贵的拷贝操作</strong>，第二个问题是<strong>在模板函数中如何按照参数的实际类型进行转发。</strong></p>
+<h2 id="三、优化性能"><a href="#三、优化性能" class="headerlink" title="三、优化性能"></a>三、优化性能</h2><p>引入右值解决两个问题，第一个问题是<strong>临时对象非必要的昂贵的拷贝操作</strong>，第二个问题是<strong>在模板函数中如何按照参数的实际类型进行转发。</strong></p>
 <p>C++ 中引入右值引用和移动语义，可以避免无谓的复制，提高程序性能。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
 
@@ -567,15 +564,14 @@ Test <span class="token function">func</span><span class="token punctuation">(</
 <p>从结果中可以看到，拷贝构造函数调用了两次，一次是 func() 函数内部创建的对象返回出来构造一个临时对象产生的，另一次是在 main 函数中构造 t 对象产生的。第二次的 destruct 是因为临时对象在构造 t 对象之后就销毁了。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">Test<span class="token operator">&amp;&amp;</span> t <span class="token operator">=</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>func() 返回的右值本应该在表达式语句结束后，其生命也就结束了（因为是临时变量），而通过右值引用，该右值又重获新生，其生命期将与右值引用类型变量 t 的生命期一样，只要 t 还活着，该右值临时变量将会一直存活下去。实际上就是给那个临时变量取了个名字。</p>
+<p>func() 返回的右值本应该在表达式语句结束后，其生命也就结束了（因为是临时变量），而通过右值引用，该右值又重获新生，其生命期将与右值引用类型变量 t 的生命期一样，只要 t 还活着，该右值临时变量将会一直存活下去。</p>
 <p><img src="/pic/36086_002.jpg"></p>
 <p>通过右值引用，比之前少了一次拷贝构造和一次析构，原因在于右值引用绑定了右值，让临时右值的生命周期延长了。可以利用这个特点做一些性能优化，即避免临时对象的拷贝构造和析构，事实上，在 C++98/03 中，通过常量左值引用也经常用来做性能优化。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">const</span> Test<span class="token operator">&amp;</span> t <span class="token operator">=</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>输出结果和右值引用一样。</p>
 <h2 id="四、移动语义⭐"><a href="#四、移动语义⭐" class="headerlink" title="四、移动语义⭐"></a>四、移动语义⭐</h2><p>C++11 中可以将左值强制转换为右值，从而避免对象的拷贝来提升性能。move 将对象的状态或者所有权从一个对象转移到另一个对象，没有内存拷贝。深拷贝和 move 的区别如图：</p>
 <p><img src="/./pic/36086_003.jpg"></p>
-<p>从图可以看出，深拷贝会有两份内存，而 move 只有一份，move 只是将内存的所有者切换为目标对象，并没有移动任何东西。</p>
+<p>从图可以看出，深拷贝会有两份内存，而 move 只有一份，move 只是将内存的所有者切换为目标对象，并没有拷贝任何东西。</p>
 <p>在 C++11 之前的拷贝构造函数和赋值函数要有如下定义：</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// 赋值函数</span>
 T<span class="token operator">&amp;</span> T<span class="token double-colon punctuation">::</span><span class="token keyword">operator</span><span class="token operator">=</span><span class="token punctuation">(</span><span class="token keyword">const</span> T<span class="token operator">&amp;</span> rhs<span class="token punctuation">)</span>
@@ -713,49 +709,58 @@ Test <span class="token function">test3</span><span class="token punctuation">(<
 
 <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
-    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"**** test1 ****\n"</span><span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"----test_with_nrvo\n"</span><span class="token punctuation">;</span>
     Test t1 <span class="token operator">=</span> <span class="token function">test1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"\n**** test2 ****\n"</span><span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"\n----test_with_move\n"</span><span class="token punctuation">;</span>
     Test t2 <span class="token operator">=</span> <span class="token function">test2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"\n**** test3 ****\n"</span><span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"\n----test_no_nrvo\n"</span><span class="token punctuation">;</span>
     Test t3 <span class="token operator">=</span> <span class="token function">test3</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><img src="/pic/36086_004.png"></p>
-<h2 id="五、完美转发⭐"><a href="#五、完美转发⭐" class="headerlink" title="五、完美转发⭐"></a>五、完美转发⭐</h2><p>所谓完美转发，是指在函数模板中，完全依照模板的参数的类型（即保持参数的左值、右值特性），将参数传递给函数模板中调用的另外一个函数。</p>
+<h2 id="五、完美转发⭐"><a href="#五、完美转发⭐" class="headerlink" title="五、完美转发⭐"></a>五、完美转发⭐</h2><p>指在函数模板中，完全依照模板的参数类型（即保持参数的左值、右值特性），将参数传递给函数模板中调用的另外一个函数。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+
 <span class="token keyword">void</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">&amp;&amp;</span> i<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"rvalue"</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
+
 <span class="token keyword">void</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">&amp;</span> i<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"lvalue"</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
+
 <span class="token keyword">void</span> <span class="token function">forward_t</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">&amp;&amp;</span> i<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token function">test</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
+
 <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token function">forward_t</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// lvalue，5 在此时是右值，在 test 调用的时候就是左值</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>C++11 提供了 <strong>std::forward</strong>，将参数传递给函数中调用的另一个函数，按照参数本来的类型转发。</p>
+<p>C++11 提供了 <strong>std::forward</strong>，将参数传递给函数中调用的另一个函数，按照参数原本的类型转发。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+
 <span class="token keyword">void</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">&amp;&amp;</span> i<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"rvalue ref\n"</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
+
 <span class="token keyword">void</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">&amp;</span> i<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"lvalue ref\n"</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
+
 <span class="token keyword">void</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">int</span><span class="token operator">&amp;&amp;</span> i<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"const rvalue ref\n"</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
+
 <span class="token keyword">void</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">int</span><span class="token operator">&amp;</span> i<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"const lvalue ref\n"</span><span class="token punctuation">;</span>
@@ -775,7 +780,8 @@ Test <span class="token function">test3</span><span class="token punctuation">(<
     <span class="token function">forward_t</span><span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span><span class="token function">move</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// rvalue ref</span>
     <span class="token function">forward_t</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// const lvalue ref</span>
     <span class="token function">forward_t</span><span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span><span class="token function">move</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// const rvalue ref</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>
